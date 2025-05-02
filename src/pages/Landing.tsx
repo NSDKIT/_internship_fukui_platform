@@ -11,23 +11,23 @@ const Landing: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-                Connect Students with Meaningful Internships
+                学生と企業をつなぐインターンシップマッチング
               </h1>
               <p className="text-lg md:text-xl opacity-90">
-                Find the perfect internship opportunity that aligns with your career goals, or discover talented students for your company.
+                あなたのキャリア目標に合った完璧なインターンシップを見つけましょう。または、企業として才能ある学生を発見しましょう。
               </p>
               <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 pt-4">
                 <Link 
                   to="/register" 
                   className="bg-white text-blue-600 hover:bg-gray-100 px-6 py-3 rounded-lg font-medium text-center transition-colors duration-200"
                 >
-                  Sign Up Free
+                  無料で登録
                 </Link>
                 <Link 
                   to="/login" 
                   className="border border-white text-white hover:bg-white/10 px-6 py-3 rounded-lg font-medium text-center transition-colors duration-200"
                 >
-                  Login
+                  ログイン
                 </Link>
               </div>
             </div>
@@ -46,9 +46,9 @@ const Landing: React.FC = () => {
       <section className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">How It Works</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">サービスの特徴</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              We connect university students with companies offering quality internships through a simple, streamlined process.
+              シンプルで効率的なプロセスで、大学の学生と質の高いインターンシップを提供する企業をつなぎます。
             </p>
           </div>
           
@@ -58,20 +58,20 @@ const Landing: React.FC = () => {
               <div className="bg-blue-100 w-14 h-14 rounded-full flex items-center justify-center mb-4">
                 <BookOpen className="h-7 w-7 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-800">For Students</h3>
-              <p className="text-gray-600 mb-4">Create your profile, browse internships that match your skills, and apply directly through our platform.</p>
+              <h3 className="text-xl font-semibold mb-3 text-gray-800">学生の方へ</h3>
+              <p className="text-gray-600 mb-4">プロフィールを作成し、スキルに合ったインターンシップを閲覧し、直接応募できます。</p>
               <ul className="space-y-2">
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  <span className="text-gray-600">Create professional profile</span>
+                  <span className="text-gray-600">プロフェッショナルなプロフィール作成</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  <span className="text-gray-600">Apply to relevant internships</span>
+                  <span className="text-gray-600">関連するインターンシップへの応募</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  <span className="text-gray-600">Receive company messages</span>
+                  <span className="text-gray-600">企業からのメッセージ受信</span>
                 </li>
               </ul>
             </div>
@@ -81,20 +81,20 @@ const Landing: React.FC = () => {
               <div className="bg-blue-100 w-14 h-14 rounded-full flex items-center justify-center mb-4">
                 <Building className="h-7 w-7 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-800">For Companies</h3>
-              <p className="text-gray-600 mb-4">Post internship opportunities, search for talented students, and manage your hiring process easily.</p>
+              <h3 className="text-xl font-semibold mb-3 text-gray-800">企業の方へ</h3>
+              <p className="text-gray-600 mb-4">インターンシップの機会を投稿し、才能ある学生を検索し、採用プロセスを簡単に管理できます。</p>
               <ul className="space-y-2">
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  <span className="text-gray-600">Post internship opportunities</span>
+                  <span className="text-gray-600">インターンシップの機会を投稿</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  <span className="text-gray-600">Search student database</span>
+                  <span className="text-gray-600">学生データベースの検索</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  <span className="text-gray-600">Track application progress</span>
+                  <span className="text-gray-600">応募状況の追跡</span>
                 </li>
               </ul>
             </div>
@@ -104,20 +104,20 @@ const Landing: React.FC = () => {
               <div className="bg-blue-100 w-14 h-14 rounded-full flex items-center justify-center mb-4">
                 <Search className="h-7 w-7 text-blue-600" />
               </div>
-              <h3 className="text-xl font-semibold mb-3 text-gray-800">Find Matches</h3>
-              <p className="text-gray-600 mb-4">Our intelligent matching algorithm connects the right students with the right companies.</p>
+              <h3 className="text-xl font-semibold mb-3 text-gray-800">マッチング機能</h3>
+              <p className="text-gray-600 mb-4">インテリジェントなマッチングアルゴリズムが、適切な学生と企業をつなぎます。</p>
               <ul className="space-y-2">
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  <span className="text-gray-600">Advanced filtering options</span>
+                  <span className="text-gray-600">高度なフィルタリングオプション</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  <span className="text-gray-600">Skill-based matching</span>
+                  <span className="text-gray-600">スキルベースのマッチング</span>
                 </li>
                 <li className="flex items-start">
                   <span className="text-green-500 mr-2">✓</span>
-                  <span className="text-gray-600">Direct messaging system</span>
+                  <span className="text-gray-600">ダイレクトメッセージングシステム</span>
                 </li>
               </ul>
             </div>
@@ -129,35 +129,35 @@ const Landing: React.FC = () => {
       <section className="py-16 px-4 bg-gray-50">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">Why Choose InternMatch</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">InternMatchを選ぶ理由</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              We're dedicated to creating meaningful connections between students and companies through quality internships.
+              質の高いインターンシップを通じて、学生と企業の間に意味のあるつながりを作ることに専念しています。
             </p>
           </div>
           
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <Heart className="h-10 w-10 text-red-500 mb-4" />
-              <h3 className="text-xl font-semibold mb-2 text-gray-800">Quality Matches</h3>
-              <p className="text-gray-600">Our intelligent matching system helps find the perfect fit for both students and companies.</p>
+              <h3 className="text-xl font-semibold mb-2 text-gray-800">質の高いマッチング</h3>
+              <p className="text-gray-600">インテリジェントなマッチングシステムが、学生と企業の両方にとって完璧な組み合わせを見つけます。</p>
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <Award className="h-10 w-10 text-amber-500 mb-4" />
-              <h3 className="text-xl font-semibold mb-2 text-gray-800">Verified Opportunities</h3>
-              <p className="text-gray-600">All internships on our platform are verified to ensure they provide valuable learning experiences.</p>
+              <h3 className="text-xl font-semibold mb-2 text-gray-800">検証済みの機会</h3>
+              <p className="text-gray-600">当プラットフォームのすべてのインターンシップは、貴重な学習体験を提供することを確認しています。</p>
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <Clock className="h-10 w-10 text-green-500 mb-4" />
-              <h3 className="text-xl font-semibold mb-2 text-gray-800">Time Efficient</h3>
-              <p className="text-gray-600">Streamlined processes and intuitive interfaces save time for both students and companies.</p>
+              <h3 className="text-xl font-semibold mb-2 text-gray-800">時間効率</h3>
+              <p className="text-gray-600">効率化されたプロセスと直感的なインターフェースで、学生と企業の両方の時間を節約します。</p>
             </div>
             
             <div className="bg-white p-6 rounded-lg shadow-sm">
               <DollarSign className="h-10 w-10 text-blue-500 mb-4" />
-              <h3 className="text-xl font-semibold mb-2 text-gray-800">Paid Internships</h3>
-              <p className="text-gray-600">We focus on paid opportunities that value students' time and contributions.</p>
+              <h3 className="text-xl font-semibold mb-2 text-gray-800">有給インターンシップ</h3>
+              <p className="text-gray-600">学生の時間と貢献を評価する有給の機会に焦点を当てています。</p>
             </div>
           </div>
         </div>
@@ -167,9 +167,9 @@ const Landing: React.FC = () => {
       <section className="py-16 px-4 bg-white">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-800 mb-4">Success Stories</h2>
+            <h2 className="text-3xl font-bold text-gray-800 mb-4">成功事例</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Hear from students and companies who've found success through our platform.
+              当プラットフォームを通じて成功を収めた学生と企業の声をお聞きください。
             </p>
           </div>
           
@@ -180,12 +180,12 @@ const Landing: React.FC = () => {
                   Y
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">Yuki Tanaka</h4>
-                  <p className="text-gray-600 text-sm">Computer Science Student</p>
+                  <h4 className="font-semibold text-gray-900">田中 優希</h4>
+                  <p className="text-gray-600 text-sm">コンピュータサイエンス専攻</p>
                 </div>
               </div>
               <p className="text-gray-700 italic">
-                "Through InternMatch, I found a fantastic internship at a tech startup that aligned perfectly with my career goals. The application process was smooth, and I was able to showcase my projects and skills effectively."
+                「InternMatchを通じて、キャリア目標にぴったり合った素晴らしいインターンシップを見つけることができました。応募プロセスはスムーズで、プロジェクトやスキルを効果的にアピールできました。」
               </p>
             </div>
             
@@ -195,12 +195,12 @@ const Landing: React.FC = () => {
                   T
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">TechNova Inc.</h4>
-                  <p className="text-gray-600 text-sm">Software Development Company</p>
+                  <h4 className="font-semibold text-gray-900">テックノバ株式会社</h4>
+                  <p className="text-gray-600 text-sm">ソフトウェア開発会社</p>
                 </div>
               </div>
               <p className="text-gray-700 italic">
-                "We've found exceptional talent through InternMatch. The platform makes it easy to identify students with the exact skills we need, and the communication tools have streamlined our hiring process significantly."
+                「InternMatchを通じて、素晴らしい人材を見つけることができました。プラットフォームのおかげで、必要なスキルを持つ学生を簡単に特定でき、コミュニケーションツールにより採用プロセスが大幅に効率化されました。」
               </p>
             </div>
           </div>
@@ -210,22 +210,22 @@ const Landing: React.FC = () => {
       {/* CTA Section */}
       <section className="py-16 px-4 bg-blue-600 text-white">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6">Ready to find your perfect match?</h2>
+          <h2 className="text-3xl font-bold mb-6">完璧なマッチングを見つける準備はできましたか？</h2>
           <p className="text-xl opacity-90 mb-8">
-            Join thousands of students and companies who have already found their perfect match.
+            すでに完璧なマッチングを見つけた何千人もの学生と企業に参加しましょう。
           </p>
           <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-4">
             <Link 
               to="/register" 
               className="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-medium transition-colors duration-200"
             >
-              Get Started
+              始める
             </Link>
             <Link 
               to="/login" 
               className="border border-white text-white hover:bg-white/10 px-8 py-3 rounded-lg font-medium transition-colors duration-200"
             >
-              Learn More
+              詳細を見る
             </Link>
           </div>
         </div>
@@ -241,37 +241,37 @@ const Landing: React.FC = () => {
                 <span className="text-white font-bold text-lg">InternMatch</span>
               </div>
               <p className="text-sm text-gray-400 mb-4">
-                Connecting university students with quality, paid internships since 2025.
+                2025年から、大学の学生と質の高い有給インターンシップをつなげています。
               </p>
             </div>
             
             <div>
-              <h4 className="text-white font-semibold mb-4">For Students</h4>
+              <h4 className="text-white font-semibold mb-4">学生の方へ</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Browse Internships</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Create Profile</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Career Resources</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Success Stories</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">インターンシップを閲覧</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">プロフィールを作成</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">キャリアリソース</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">成功事例</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="text-white font-semibold mb-4">For Companies</h4>
+              <h4 className="text-white font-semibold mb-4">企業の方へ</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Post Internships</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Search Students</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Recruitment Tools</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Success Stories</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">インターンシップを投稿</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">学生を検索</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">採用ツール</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">成功事例</a></li>
               </ul>
             </div>
             
             <div>
-              <h4 className="text-white font-semibold mb-4">Company</h4>
+              <h4 className="text-white font-semibold mb-4">会社情報</h4>
               <ul className="space-y-2 text-sm">
-                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">About Us</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Blog</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Contact</a></li>
-                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">会社概要</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">ブログ</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">お問い合わせ</a></li>
+                <li><a href="#" className="hover:text-blue-400 transition-colors duration-200">プライバシーポリシー</a></li>
               </ul>
             </div>
           </div>

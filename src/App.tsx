@@ -26,13 +26,13 @@ function App() {
       <NotificationProvider>
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/ログイン" element={<Login />} />
-          <Route path="/新規登録" element={<Register />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
           
           <Route element={<Layout />}>
-            {/* 学生向けルート */}
+            {/* Student Routes */}
             <Route 
-              path="/学生/ダッシュボード" 
+              path="/student/dashboard" 
               element={
                 <ProtectedRoute userType="student">
                   <StudentDashboard />
@@ -40,7 +40,7 @@ function App() {
               } 
             />
             <Route 
-              path="/学生/プロフィール" 
+              path="/student/profile" 
               element={
                 <ProtectedRoute userType="student">
                   <StudentProfile />
@@ -48,7 +48,7 @@ function App() {
               } 
             />
             <Route 
-              path="/学生/インターンシップ検索" 
+              path="/student/search" 
               element={
                 <ProtectedRoute userType="student">
                   <InternshipSearch />
@@ -56,7 +56,7 @@ function App() {
               } 
             />
             <Route 
-              path="/学生/応募一覧" 
+              path="/student/applications" 
               element={
                 <ProtectedRoute userType="student">
                   <Applications />
@@ -64,9 +64,9 @@ function App() {
               } 
             />
 
-            {/* 企業向けルート */}
+            {/* Company Routes */}
             <Route 
-              path="/企業/ダッシュボード" 
+              path="/company/dashboard" 
               element={
                 <ProtectedRoute userType="company">
                   <CompanyDashboard />
@@ -74,7 +74,7 @@ function App() {
               } 
             />
             <Route 
-              path="/企業/プロフィール" 
+              path="/company/profile" 
               element={
                 <ProtectedRoute userType="company">
                   <CompanyProfile />
@@ -82,7 +82,7 @@ function App() {
               } 
             />
             <Route 
-              path="/企業/インターンシップ作成" 
+              path="/company/create-internship" 
               element={
                 <ProtectedRoute userType="company">
                   <CreateInternship />
@@ -90,7 +90,7 @@ function App() {
               } 
             />
             <Route 
-              path="/企業/インターンシップ管理" 
+              path="/company/manage-internships" 
               element={
                 <ProtectedRoute userType="company">
                   <ManageInternships />
@@ -98,7 +98,7 @@ function App() {
               } 
             />
             <Route 
-              path="/企業/学生検索" 
+              path="/company/student-search" 
               element={
                 <ProtectedRoute userType="company">
                   <StudentSearch />
@@ -106,13 +106,13 @@ function App() {
               } 
             />
 
-            {/* 共通ルート */}
+            {/* Shared Routes */}
             <Route 
-              path="/インターンシップ/:id" 
+              path="/internship/:id" 
               element={<InternshipDetails />} 
             />
             <Route 
-              path="/メッセージ" 
+              path="/messages" 
               element={
                 <ProtectedRoute>
                   <Messages />
