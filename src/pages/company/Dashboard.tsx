@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowUpRight, Briefcase, Building, CheckCircle, Clock, Users, AlertCircle } from 'lucide-react';
+import { Eye, Clock, CheckCircle, XCircle, Briefcase, ArrowUpRight, User, Building, MapPin, DollarSign } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Application, Internship } from '../../types';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
@@ -10,11 +10,11 @@ const mockInternships: Internship[] = [
   {
     id: '101',
     companyId: 'c1',
-    title: 'Frontend Developer Intern',
-    description: 'Join our team as a frontend developer intern...',
+    title: 'フロントエンド開発インターン',
+    description: '当社のチームに参加し、フロントエンド開発インターンとして...',
     requirements: ['React', 'JavaScript', 'CSS'],
-    responsibilities: ['Building user interfaces', 'Implementing responsive designs'],
-    location: 'Tokyo',
+    responsibilities: ['ユーザーインターフェースの構築', 'レスポンシブデザインの実装'],
+    location: '東京',
     isRemote: false,
     salary: {
       amount: 20,
@@ -24,7 +24,7 @@ const mockInternships: Internship[] = [
     endDate: new Date(Date.now() + 120 * 24 * 60 * 60 * 1000).toISOString(),
     hoursPerWeek: 20,
     applicationDeadline: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-    industry: 'Technology',
+    industry: 'テクノロジー',
     skills: ['React', 'TypeScript', 'Tailwind CSS'],
     status: 'published',
     createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
@@ -33,11 +33,11 @@ const mockInternships: Internship[] = [
   {
     id: '102',
     companyId: 'c1',
-    title: 'Backend Developer Intern',
-    description: 'Work on our server infrastructure and APIs...',
+    title: 'バックエンド開発インターン',
+    description: 'サーバーインフラストラクチャとAPIの開発...',
     requirements: ['Node.js', 'Express', 'MongoDB'],
-    responsibilities: ['Building APIs', 'Database management'],
-    location: 'Tokyo',
+    responsibilities: ['APIの構築', 'データベース管理'],
+    location: '東京',
     isRemote: true,
     salary: {
       amount: 22,
@@ -47,7 +47,7 @@ const mockInternships: Internship[] = [
     endDate: new Date(Date.now() + 135 * 24 * 60 * 60 * 1000).toISOString(),
     hoursPerWeek: 20,
     applicationDeadline: new Date(Date.now() + 21 * 24 * 60 * 60 * 1000).toISOString(),
-    industry: 'Technology',
+    industry: 'テクノロジー',
     skills: ['Node.js', 'Express', 'MongoDB'],
     status: 'published',
     createdAt: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
@@ -56,11 +56,11 @@ const mockInternships: Internship[] = [
   {
     id: '103',
     companyId: 'c1',
-    title: 'Product Design Intern',
-    description: 'Help design user interfaces and experiences...',
-    requirements: ['Figma', 'UI/UX', 'Design thinking'],
-    responsibilities: ['Creating wireframes', 'User research'],
-    location: 'Tokyo',
+    title: 'プロダクトデザインインターン',
+    description: 'ユーザーインターフェースとエクスペリエンスのデザイン...',
+    requirements: ['Figma', 'UI/UX', 'デザイン思考'],
+    responsibilities: ['ワイヤーフレーム作成', 'ユーザーリサーチ'],
+    location: '東京',
     isRemote: false,
     salary: {
       amount: 18,
@@ -70,8 +70,8 @@ const mockInternships: Internship[] = [
     endDate: new Date(Date.now() + 150 * 24 * 60 * 60 * 1000).toISOString(),
     hoursPerWeek: 15,
     applicationDeadline: new Date(Date.now() + 30 * 24 * 60 * 60 * 1000).toISOString(),
-    industry: 'Design',
-    skills: ['Figma', 'UI/UX', 'Wireframing'],
+    industry: 'デザイン',
+    skills: ['Figma', 'UI/UX', 'ワイヤーフレーム'],
     status: 'draft',
     createdAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
     updatedAt: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
@@ -122,11 +122,11 @@ const mockApplications: Application[] = [
 ];
 
 const mockStudents: Record<string, { name: string; university: string; avatarUrl?: string }> = {
-  s1: { name: 'Yuki Tanaka', university: 'Tokyo University' },
-  s2: { name: 'Haruto Sato', university: 'Kyoto University' },
-  s3: { name: 'Airi Yamamoto', university: 'Osaka University' },
-  s4: { name: 'Riku Nakamura', university: 'Tohoku University' },
-  s5: { name: 'Mio Kobayashi', university: 'Waseda University' },
+  s1: { name: '田中 優希', university: '東京大学' },
+  s2: { name: '佐藤 遥斗', university: '京都大学' },
+  s3: { name: '山本 愛莉', university: '大阪大学' },
+  s4: { name: '中村 陸', university: '東北大学' },
+  s5: { name: '小林 美桜', university: '早稲田大学' },
 };
 
 const CompanyDashboard: React.FC = () => {
@@ -148,7 +148,7 @@ const CompanyDashboard: React.FC = () => {
           setIsLoading(false);
         }, 800);
       } catch (error) {
-        console.error('Error fetching dashboard data:', error);
+        console.error('ダッシュボードデータの取得に失敗:', error);
         setIsLoading(false);
       }
     };
@@ -165,13 +165,13 @@ const CompanyDashboard: React.FC = () => {
   };
 
   const getStudentById = (id: string) => {
-    return mockStudents[id] || { name: 'Unknown Student', university: 'Unknown University' };
+    return mockStudents[id] || { name: '不明な学生', university: '不明な大学' };
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+    return new Date(dateString).toLocaleDateString('ja-JP', {
       year: 'numeric',
-      month: 'short',
+      month: 'long',
       day: 'numeric',
     });
   };
@@ -213,10 +213,10 @@ const CompanyDashboard: React.FC = () => {
     <div className="py-8">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">
-          Welcome, {user?.name}!
+          ようこそ、{user?.name}様！
         </h1>
         <p className="text-gray-600">
-          Here's an overview of your internship postings and applications.
+          インターンシップの掲載状況と応募者の概要をご確認ください。
         </p>
       </div>
 
@@ -224,16 +224,16 @@ const CompanyDashboard: React.FC = () => {
         <div className="bg-blue-50 rounded-lg p-6 border border-blue-100">
           <div className="flex items-center text-blue-600 mb-3">
             <Briefcase className="h-5 w-5 mr-2" />
-            <h3 className="font-semibold">Active Internships</h3>
+            <h3 className="font-semibold">掲載中のインターンシップ</h3>
           </div>
           <p className="text-3xl font-bold">{activeInternships}</p>
-          <p className="text-sm text-gray-600">Currently published</p>
+          <p className="text-sm text-gray-600">現在公開中</p>
           <div className="mt-3">
             <Link 
               to="/company/create-internship" 
               className="text-sm text-blue-600 hover:text-blue-800 font-medium"
             >
-              + Post a new internship
+              + 新規インターンシップを掲載
             </Link>
           </div>
         </div>
@@ -241,16 +241,16 @@ const CompanyDashboard: React.FC = () => {
         <div className="bg-purple-50 rounded-lg p-6 border border-purple-100">
           <div className="flex items-center text-purple-600 mb-3">
             <Users className="h-5 w-5 mr-2" />
-            <h3 className="font-semibold">Applications</h3>
+            <h3 className="font-semibold">応募</h3>
           </div>
           <p className="text-3xl font-bold">{totalApplications}</p>
-          <p className="text-sm text-gray-600">{pendingApplications} pending review</p>
+          <p className="text-sm text-gray-600">{pendingApplications}件の審査待ち</p>
           <div className="mt-3">
             <Link 
               to="/company/manage-internships" 
               className="text-sm text-purple-600 hover:text-purple-800 font-medium"
             >
-              Review applications
+              応募を確認
             </Link>
           </div>
         </div>
@@ -258,31 +258,31 @@ const CompanyDashboard: React.FC = () => {
         <div className="bg-amber-50 rounded-lg p-6 border border-amber-100">
           <div className="flex items-center text-amber-600 mb-3">
             <Clock className="h-5 w-5 mr-2" />
-            <h3 className="font-semibold">Next Deadline</h3>
+            <h3 className="font-semibold">次回の締切</h3>
           </div>
           {nextDeadline ? (
             <>
-              <p className="text-3xl font-bold">{nextDeadline.daysRemaining} days</p>
+              <p className="text-3xl font-bold">{nextDeadline.daysRemaining}日</p>
               <p className="text-sm text-gray-600 truncate">{nextDeadline.internship.title}</p>
               <div className="mt-3">
                 <Link 
                   to={`/internship/${nextDeadline.internship.id}`}
                   className="text-sm text-amber-600 hover:text-amber-800 font-medium"
                 >
-                  View posting
+                  掲載を確認
                 </Link>
               </div>
             </>
           ) : (
             <>
               <p className="text-3xl font-bold">-</p>
-              <p className="text-sm text-gray-600">No active deadlines</p>
+              <p className="text-sm text-gray-600">締切予定なし</p>
               <div className="mt-3">
                 <Link 
                   to="/company/create-internship" 
                   className="text-sm text-amber-600 hover:text-amber-800 font-medium"
                 >
-                  Create an internship
+                  インターンシップを作成
                 </Link>
               </div>
             </>
@@ -294,15 +294,15 @@ const CompanyDashboard: React.FC = () => {
         <div className="bg-amber-50 border-l-4 border-amber-500 p-4 mb-8">
           <div className="flex">
             <div className="flex-shrink-0">
-              <AlertCircle className="h-5 w-5 text-amber-400" />
+              <Clock className="h-5 w-5 text-amber-400" />
             </div>
             <div className="ml-3">
               <p className="text-sm text-amber-700">
-                You have {draftInternships} draft {draftInternships === 1 ? 'internship' : 'internships'} that {draftInternships === 1 ? 'is' : 'are'} not yet published.
+                {draftInternships}件の下書き{draftInternships === 1 ? 'が' : 'が'}まだ公開されていません。
               </p>
               <p className="text-sm mt-2">
                 <Link to="/company/manage-internships" className="font-medium text-amber-700 underline hover:text-amber-600">
-                  Complete and publish {draftInternships === 1 ? 'it' : 'them'} to start receiving applications.
+                  完成させて公開し、応募の受付を開始しましょう。
                 </Link>
               </p>
             </div>
@@ -312,12 +312,12 @@ const CompanyDashboard: React.FC = () => {
 
       <div className="mb-10">
         <div className="flex justify-between items-center mb-5">
-          <h2 className="text-xl font-bold text-gray-900">Recent Applications</h2>
+          <h2 className="text-xl font-bold text-gray-900">最近の応募</h2>
           <Link 
             to="/company/manage-internships" 
             className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center"
           >
-            View all
+            すべて見る
             <ArrowUpRight className="h-4 w-4 ml-1" />
           </Link>
         </div>
@@ -325,15 +325,15 @@ const CompanyDashboard: React.FC = () => {
         {applications.length === 0 ? (
           <div className="bg-white rounded-lg border p-6 text-center">
             <Users className="h-12 w-12 text-gray-400 mx-auto mb-3" />
-            <h3 className="text-lg font-medium text-gray-900 mb-1">No applications yet</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-1">応募はまだありません</h3>
             <p className="text-gray-600 mb-4">
-              Once students apply to your internship positions, they will appear here.
+              学生からの応募があると、ここに表示されます。
             </p>
             <Link 
               to="/company/create-internship" 
               className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
             >
-              Post a New Internship
+              インターンシップを掲載
             </Link>
           </div>
         ) : (
@@ -353,7 +353,7 @@ const CompanyDashboard: React.FC = () => {
                               <img src={student.avatarUrl} alt={student.name} className="w-10 h-10 rounded-full" />
                             ) : (
                               <span className="text-sm font-medium text-gray-500">
-                                {student.name.charAt(0).toUpperCase()}
+                                {student.name.charAt(0)}
                               </span>
                             )}
                           </div>
@@ -367,11 +367,11 @@ const CompanyDashboard: React.FC = () => {
                         
                         <div className="mt-4 sm:mt-0">
                           <p className="text-sm font-medium text-gray-900">
-                            {internship?.title || 'Untitled Internship'}
+                            {internship?.title || '無題のインターンシップ'}
                           </p>
                           <div className="flex items-center text-xs text-gray-500 mt-1">
                             <Clock className="h-4 w-4 mr-1" />
-                            <span>Applied {formatDate(application.appliedAt)}</span>
+                            <span>応募日: {formatDate(application.appliedAt)}</span>
                           </div>
                         </div>
                         
@@ -379,31 +379,31 @@ const CompanyDashboard: React.FC = () => {
                           {application.status === 'pending' && (
                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
                               <Clock className="h-3 w-3 mr-1" />
-                              Pending Review
+                              審査待ち
                             </span>
                           )}
                           {application.status === 'reviewing' && (
                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                               <Eye className="h-3 w-3 mr-1" />
-                              Under Review
+                              審査中
                             </span>
                           )}
                           {application.status === 'interview' && (
                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
                               <User className="h-3 w-3 mr-1" />
-                              Interview Stage
+                              面接段階
                             </span>
                           )}
                           {application.status === 'accepted' && (
                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                               <CheckCircle className="h-3 w-3 mr-1" />
-                              Accepted
+                              合格
                             </span>
                           )}
                           {application.status === 'rejected' && (
                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800">
-                              <X className="h-3 w-3 mr-1" />
-                              Rejected
+                              <XCircle className="h-3 w-3 mr-1" />
+                              不合格
                             </span>
                           )}
                         </div>
@@ -411,21 +411,21 @@ const CompanyDashboard: React.FC = () => {
                       
                       <div className="mt-4 flex flex-wrap gap-2">
                         <button className="inline-flex items-center justify-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-                          View Application
+                          応募を確認
                         </button>
                         {application.status === 'pending' && (
                           <button className="inline-flex items-center justify-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                            Mark as Reviewing
+                            審査を開始
                           </button>
                         )}
                         {application.status === 'reviewing' && (
                           <button className="inline-flex items-center justify-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                            Schedule Interview
+                            面接を設定
                           </button>
                         )}
                         {application.status === 'interview' && (
                           <button className="inline-flex items-center justify-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                            Make Decision
+                            結果を通知
                           </button>
                         )}
                       </div>
@@ -440,12 +440,12 @@ const CompanyDashboard: React.FC = () => {
 
       <div>
         <div className="flex justify-between items-center mb-5">
-          <h2 className="text-xl font-bold text-gray-900">Your Internship Postings</h2>
+          <h2 className="text-xl font-bold text-gray-900">インターンシップ掲載一覧</h2>
           <Link 
             to="/company/manage-internships" 
             className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center"
           >
-            View all
+            すべて見る
             <ArrowUpRight className="h-4 w-4 ml-1" />
           </Link>
         </div>
@@ -453,15 +453,15 @@ const CompanyDashboard: React.FC = () => {
         {internships.length === 0 ? (
           <div className="bg-white rounded-lg border p-6 text-center">
             <Briefcase className="h-12 w-12 text-gray-400 mx-auto mb-3" />
-            <h3 className="text-lg font-medium text-gray-900 mb-1">No internships created</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-1">インターンシップがありません</h3>
             <p className="text-gray-600 mb-4">
-              Create your first internship posting to start receiving applications from qualified students.
+              最初のインターンシップを作成して、優秀な学生からの応募を受け付けましょう。
             </p>
             <Link 
               to="/company/create-internship" 
               className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
             >
-              Create Internship
+              インターンシップを作成
             </Link>
           </div>
         ) : (
@@ -478,11 +478,11 @@ const CompanyDashboard: React.FC = () => {
                     </div>
                     {internship.status === 'published' ? (
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                        Published
+                        公開中
                       </span>
                     ) : (
                       <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
-                        Draft
+                        下書き
                       </span>
                     )}
                   </div>
@@ -492,24 +492,24 @@ const CompanyDashboard: React.FC = () => {
                       <div className="flex items-center">
                         <Building className="h-4 w-4 mr-1 text-gray-400" />
                         {internship.location}
-                        {internship.isRemote && <span className="ml-1">(Remote available)</span>}
+                        {internship.isRemote && <span className="ml-1">(リモート可)</span>}
                       </div>
                       <div className="flex items-center">
                         <Clock className="h-4 w-4 mr-1 text-gray-400" />
                         {new Date(internship.applicationDeadline) > new Date() 
-                          ? `Deadline: ${formatDate(internship.applicationDeadline)}`
-                          : 'Deadline passed'}
+                          ? `締切: ${formatDate(internship.applicationDeadline)}`
+                          : '締切済み'}
                       </div>
                     </div>
                     
                     <div className="border-t border-b py-4 my-4">
                       <div className="grid grid-cols-2 gap-4">
                         <div>
-                          <p className="text-sm text-gray-500 mb-1">Applications</p>
+                          <p className="text-sm text-gray-500 mb-1">応募数</p>
                           <p className="text-xl font-semibold">{internshipApplications.length}</p>
                         </div>
                         <div>
-                          <p className="text-sm text-gray-500 mb-1">Needs Review</p>
+                          <p className="text-sm text-gray-500 mb-1">審査待ち</p>
                           <p className="text-xl font-semibold">
                             {internshipApplications.filter(app => app.status === 'pending').length}
                           </p>
@@ -522,13 +522,13 @@ const CompanyDashboard: React.FC = () => {
                         to={`/internship/${internship.id}`}
                         className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
                       >
-                        View Details
+                        詳細を見る
                       </Link>
                       <Link
                         to={`/company/manage-internships?id=${internship.id}`}
                         className="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
                       >
-                        Manage Applications
+                        応募を管理
                       </Link>
                     </div>
                   </div>

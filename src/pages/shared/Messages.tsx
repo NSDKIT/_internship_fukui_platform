@@ -12,9 +12,8 @@ const Messages: React.FC = () => {
 
   // Mock data for demonstration
   const contacts = [
-    { id: 'u1', name: 'TechCorp Inc.', lastMessage: 'Thank you for your application...', time: '2h ago' },
-    { id: 'u2', name: 'DataFlow Analytics', lastMessage: 'When are you available for an interview?', time: '1d ago' },
-    // Add more mock contacts as needed
+    { id: 'u1', name: 'テックコープ株式会社', lastMessage: '応募ありがとうございます...', time: '2時間前' },
+    { id: 'u2', name: 'データフロー・アナリティクス', lastMessage: '面接の日程を調整させていただきたく...', time: '1日前' },
   ];
 
   useEffect(() => {
@@ -26,11 +25,10 @@ const Messages: React.FC = () => {
             id: 'm1',
             senderId: 'u1',
             receiverId: 'current_user',
-            content: 'Thank you for your application to our Frontend Developer internship position.',
+            content: '当社のフロントエンド開発インターンシップへのご応募ありがとうございます。',
             isRead: true,
             createdAt: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
           },
-          // Add more mock messages as needed
         ];
 
         // Simulate loading delay
@@ -39,7 +37,7 @@ const Messages: React.FC = () => {
           setIsLoading(false);
         }, 1000);
       } catch (error) {
-        console.error('Error fetching messages:', error);
+        console.error('メッセージの取得に失敗:', error);
         setIsLoading(false);
       }
     };
@@ -77,9 +75,9 @@ const Messages: React.FC = () => {
     const days = Math.floor(hours / 24);
 
     if (hours < 24) {
-      return hours === 0 ? 'Just now' : `${hours}h ago`;
+      return hours === 0 ? 'たった今' : `${hours}時間前`;
     } else {
-      return `${days}d ago`;
+      return `${days}日前`;
     }
   };
 
@@ -99,7 +97,7 @@ const Messages: React.FC = () => {
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
                   <input
                     type="text"
-                    placeholder="Search messages"
+                    placeholder="メッセージを検索"
                     className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
@@ -135,7 +133,7 @@ const Messages: React.FC = () => {
 
                 {filteredContacts.length === 0 && (
                   <div className="p-4 text-center text-gray-500">
-                    No conversations found
+                    会話が見つかりません
                   </div>
                 )}
               </div>
@@ -196,7 +194,7 @@ const Messages: React.FC = () => {
                         type="text"
                         value={newMessage}
                         onChange={(e) => setNewMessage(e.target.value)}
-                        placeholder="Type a message..."
+                        placeholder="メッセージを入力..."
                         className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                       />
                       <button
@@ -209,16 +207,15 @@ const Messages: React.FC = () => {
                     </form>
                   </div>
                 </>
-              )
-              : (
+              ) : (
                 <div className="flex-1 flex items-center justify-center">
                   <div className="text-center">
                     <User className="mx-auto h-12 w-12 text-gray-400" />
                     <h3 className="mt-2 text-lg font-medium text-gray-900">
-                      Select a conversation
+                      会話を選択してください
                     </h3>
                     <p className="mt-1 text-gray-500">
-                      Choose a contact to start messaging
+                      メッセージを開始するには連絡先を選択してください
                     </p>
                   </div>
                 </div>

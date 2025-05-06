@@ -48,7 +48,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
               <button 
                 className="mr-2 md:hidden"
                 onClick={onMenuClick}
-                aria-label="Open menu"
+                aria-label="メニューを開く"
               >
                 <Menu className="h-6 w-6 text-gray-700" />
               </button>
@@ -67,7 +67,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
                 <Link 
                   to="/messages" 
                   className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200 mr-2"
-                  aria-label="Messages"
+                  aria-label="メッセージ"
                 >
                   <MessageSquare className="h-5 w-5 text-gray-700" />
                 </Link>
@@ -76,7 +76,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
                   <Link 
                     to="#" 
                     className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
-                    aria-label="Notifications"
+                    aria-label="通知"
                   >
                     <Bell className="h-5 w-5 text-gray-700" />
                     {unreadCount > 0 && (
@@ -91,7 +91,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
                   <button
                     className="flex items-center focus:outline-none"
                     onClick={() => setDropdownOpen(!dropdownOpen)}
-                    aria-label="Open user menu"
+                    aria-label="ユーザーメニューを開く"
                   >
                     <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center overflow-hidden">
                       {user?.name ? (
@@ -116,7 +116,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
                         onClick={closeDropdown}
                       >
                         <User className="mr-2 h-4 w-4" />
-                        Profile
+                        プロフィール
                       </Link>
                       <button
                         className="flex items-center w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -126,7 +126,7 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
                         }}
                       >
                         <LogOut className="mr-2 h-4 w-4" />
-                        Sign out
+                        ログアウト
                       </button>
                     </div>
                   )}
@@ -142,13 +142,13 @@ const Navbar: React.FC<NavbarProps> = ({ onMenuClick }) => {
                       : 'text-gray-800 hover:text-gray-600'
                   }`}
                 >
-                  Log in
+                  ログイン
                 </Link>
                 <Link 
                   to="/register" 
                   className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded-md transition-colors duration-200"
                 >
-                  Sign up
+                  会員登録
                 </Link>
               </div>
             )}

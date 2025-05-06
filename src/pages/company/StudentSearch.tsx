@@ -3,7 +3,6 @@ import { Search, MapPin, Building, GraduationCap, Filter, Star, Mail } from 'luc
 
 const StudentSearch: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [showFilters, setShowFilters] = useState(false);
   const [selectedUniversity, setSelectedUniversity] = useState('');
   const [selectedMajor, setSelectedMajor] = useState('');
   const [selectedGradYear, setSelectedGradYear] = useState('');
@@ -12,31 +11,31 @@ const StudentSearch: React.FC = () => {
   const students = [
     {
       id: 's1',
-      name: 'Yuki Tanaka',
-      university: 'Tokyo University',
-      major: 'Computer Science',
+      name: '田中 優希',
+      university: '東京大学',
+      major: '情報工学',
       graduationYear: 2025,
-      location: 'Tokyo',
+      location: '東京',
       skills: ['React', 'TypeScript', 'Node.js'],
-      bio: 'Passionate about web development and creating user-friendly interfaces...',
+      bio: 'Web開発に情熱を持ち、ユーザーフレンドリーなインターフェースの作成を得意としています...',
     },
     // Add more mock students as needed
   ];
 
   const universities = [
-    'Tokyo University',
-    'Kyoto University',
-    'Osaka University',
-    'Waseda University',
-    'Keio University',
+    '東京大学',
+    '京都大学',
+    '大阪大学',
+    '早稲田大学',
+    '慶應義塾大学',
   ];
 
   const majors = [
-    'Computer Science',
-    'Business Administration',
-    'Engineering',
-    'Design',
-    'Marketing',
+    '情報工学',
+    '経営学',
+    '工学',
+    'デザイン',
+    'マーケティング',
   ];
 
   const gradYears = ['2024', '2025', '2026', '2027'];
@@ -55,9 +54,9 @@ const StudentSearch: React.FC = () => {
   return (
     <div className="py-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Find Talented Students</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">優秀な学生を見つける</h1>
         <p className="text-gray-600">
-          Search and connect with students who match your internship requirements.
+          インターンシップの要件に合った学生を検索し、コンタクトを取ることができます。
         </p>
       </div>
 
@@ -68,7 +67,7 @@ const StudentSearch: React.FC = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
                 type="text"
-                placeholder="Search by name or skills"
+                placeholder="名前やスキルで検索"
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -80,7 +79,7 @@ const StudentSearch: React.FC = () => {
             className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
           >
             <Filter className="h-5 w-5 mr-2" />
-            Filters
+            フィルター
           </button>
         </div>
 
@@ -88,13 +87,13 @@ const StudentSearch: React.FC = () => {
           <div className="mt-4 p-4 bg-white border border-gray-200 rounded-lg">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">University</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">大学</label>
                 <select
                   className="w-full border border-gray-300 rounded-md shadow-sm py-2 pl-3 pr-10 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   value={selectedUniversity}
                   onChange={(e) => setSelectedUniversity(e.target.value)}
                 >
-                  <option value="">All Universities</option>
+                  <option value="">すべての大学</option>
                   {universities.map(uni => (
                     <option key={uni} value={uni}>{uni}</option>
                   ))}
@@ -102,13 +101,13 @@ const StudentSearch: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Major</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">専攻</label>
                 <select
                   className="w-full border border-gray-300 rounded-md shadow-sm py-2 pl-3 pr-10 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   value={selectedMajor}
                   onChange={(e) => setSelectedMajor(e.target.value)}
                 >
-                  <option value="">All Majors</option>
+                  <option value="">すべての専攻</option>
                   {majors.map(major => (
                     <option key={major} value={major}>{major}</option>
                   ))}
@@ -116,15 +115,15 @@ const StudentSearch: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Graduation Year</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">卒業年度</label>
                 <select
                   className="w-full border border-gray-300 rounded-md shadow-sm py-2 pl-3 pr-10 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   value={selectedGradYear}
                   onChange={(e) => setSelectedGradYear(e.target.value)}
                 >
-                  <option value="">All Years</option>
+                  <option value="">すべての年度</option>
                   {gradYears.map(year => (
-                    <option key={year} value={year}>{year}</option>
+                    <option key={year} value={year}>{year}年</option>
                   ))}
                 </select>
               </div>
@@ -163,7 +162,7 @@ const StudentSearch: React.FC = () => {
                 </div>
                 <div className="flex items-center text-gray-600">
                   <MapPin className="h-4 w-4 mr-2" />
-                  <span>Class of {student.graduationYear}</span>
+                  <span>{student.graduationYear}年卒業予定</span>
                 </div>
               </div>
 
@@ -184,11 +183,11 @@ const StudentSearch: React.FC = () => {
 
               <div className="mt-6 flex justify-between">
                 <button className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                  View Profile
+                  プロフィールを見る
                 </button>
                 <button className="inline-flex items-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
                   <Mail className="h-4 w-4 mr-1" />
-                  Contact
+                  連絡する
                 </button>
               </div>
             </div>
@@ -198,9 +197,9 @@ const StudentSearch: React.FC = () => {
         {filteredStudents.length === 0 && (
           <div className="col-span-full text-center py-12 bg-white rounded-lg border">
             <Search className="mx-auto h-12 w-12 text-gray-400" />
-            <h3 className="mt-2 text-lg font-medium text-gray-900">No students found</h3>
+            <h3 className="mt-2 text-lg font-medium text-gray-900">該当する学生が見つかりません</h3>
             <p className="mt-1 text-gray-500">
-              Try adjusting your search or filter criteria to find more students.
+              検索条件やフィルターを調整して、より多くの学生を見つけてください。
             </p>
           </div>
         )}

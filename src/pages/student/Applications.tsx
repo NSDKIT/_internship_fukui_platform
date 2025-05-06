@@ -15,11 +15,11 @@ const Applications: React.FC = () => {
     '101': {
       id: '101',
       companyId: 'c1',
-      title: 'Frontend Developer Intern',
-      description: 'Join our team as a frontend developer intern...',
+      title: 'フロントエンド開発インターン',
+      description: '当社のチームに参加し、フロントエンド開発インターンとして...',
       requirements: ['React', 'JavaScript', 'CSS'],
-      responsibilities: ['Building user interfaces', 'Implementing responsive designs'],
-      location: 'Tokyo',
+      responsibilities: ['ユーザーインターフェースの構築', 'レスポンシブデザインの実装'],
+      location: '東京',
       isRemote: false,
       salary: {
         amount: 20,
@@ -29,7 +29,7 @@ const Applications: React.FC = () => {
       endDate: new Date(Date.now() + 120 * 24 * 60 * 60 * 1000).toISOString(),
       hoursPerWeek: 20,
       applicationDeadline: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-      industry: 'Technology',
+      industry: 'テクノロジー',
       skills: ['React', 'TypeScript', 'Tailwind CSS'],
       status: 'published',
       createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
@@ -38,11 +38,11 @@ const Applications: React.FC = () => {
     '102': {
       id: '102',
       companyId: 'c2',
-      title: 'Data Analyst Intern',
-      description: 'Work with our data science team...',
-      requirements: ['Python', 'SQL', 'Data visualization'],
-      responsibilities: ['Analyzing user data', 'Creating reports'],
-      location: 'Osaka',
+      title: 'データアナリストインターン',
+      description: 'データサイエンスチームと協力して...',
+      requirements: ['Python', 'SQL', 'データ可視化'],
+      responsibilities: ['ユーザーデータの分析', 'レポート作成'],
+      location: '大阪',
       isRemote: true,
       salary: {
         amount: 25,
@@ -52,7 +52,7 @@ const Applications: React.FC = () => {
       endDate: new Date(Date.now() + 135 * 24 * 60 * 60 * 1000).toISOString(),
       hoursPerWeek: 15,
       applicationDeadline: new Date(Date.now() + 21 * 24 * 60 * 60 * 1000).toISOString(),
-      industry: 'Finance',
+      industry: '金融',
       skills: ['Python', 'SQL', 'Tableau'],
       status: 'published',
       createdAt: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
@@ -61,8 +61,8 @@ const Applications: React.FC = () => {
   };
 
   const mockCompanies: Record<string, { name: string; logoUrl?: string }> = {
-    c1: { name: 'TechCorp Inc.' },
-    c2: { name: 'DataFlow Analytics' },
+    c1: { name: 'テックコープ株式会社' },
+    c2: { name: 'データフロー・アナリティクス' },
   };
 
   useEffect(() => {
@@ -94,7 +94,7 @@ const Applications: React.FC = () => {
           setIsLoading(false);
         }, 1000);
       } catch (error) {
-        console.error('Error fetching applications:', error);
+        console.error('応募履歴の取得に失敗:', error);
         setIsLoading(false);
       }
     };
@@ -154,9 +154,9 @@ const Applications: React.FC = () => {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+    return new Date(dateString).toLocaleDateString('ja-JP', {
       year: 'numeric',
-      month: 'short',
+      month: 'long',
       day: 'numeric',
     });
   };
@@ -175,7 +175,7 @@ const Applications: React.FC = () => {
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">応募履歴</h1>
         <p className="text-gray-600">
-          インターンシップへの応募状況を確認できます。
+          インターンシップへの応募状況を確認・管理できます。
         </p>
       </div>
 
@@ -223,112 +223,180 @@ const Applications: React.FC = () => {
           </button>
         </div>
 
-        <div className="flex items-center space-x-4">
-          <span className="text-sm text-gray-500">
-            {filteredApplications.length} 件の応募
-          </span>
-        </div>
+        <Link
+          to="/student/search"
+          className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
+        >
+          新規応募
+        </Link>
       </div>
 
-      {filteredApplications.length === 0 ? (
-        <div className="text-center py-12 bg-white rounded-lg border">
-          <Clock className="mx-auto h-12 w-12 text-gray-400" />
-          <h3 className="mt-2 text-sm font-medium text-gray-900">応募履歴がありません</h3>
-          <p className="mt-1 text-sm text-gray-500">インターンシップに応募して、キャリアの第一歩を踏み出しましょう。</p>
-          <div className="mt-6">
-            <Link
-              to="/student/search"
-              className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-            >
-              インターンシップを探す
-            </Link>
+      <div className="space-y-4">
+        {filteredApplications.length === 0 ? (
+          <div className="text-center py-12 bg-white rounded-lg border">
+            <Clock className="mx-auto h-12 w-12 text-gray-400" />
+            <h3 className="mt-2 text-lg font-medium text-gray-900">応募履歴なし</h3>
+            <p className="mt-1 text-gray-500">
+              {selectedFilter === 'all'
+                ? "まだインターンシップに応募していません。"
+                : `${getStatusText(selectedFilter)}の応募はありません。`}
+            </p>
+            <div className="mt-6">
+              <Link
+                to="/student/search"
+                className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
+              >
+                インターンシップを探す
+              </Link>
+            </div>
           </div>
-        </div>
-      ) : (
-        <div className="bg-white shadow overflow-hidden sm:rounded-md">
-          <ul className="divide-y divide-gray-200">
-            {filteredApplications.map(application => {
-              const internship = mockInternships[application.internshipId];
-              const company = mockCompanies[internship.companyId];
-              
-              return (
-                <li key={application.id}>
-                  <div className="px-4 py-4 sm:px-6">
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center">
-                        <div className="flex-shrink-0">
-                          <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
+        ) : (
+          filteredApplications.map((application) => {
+            const internship = mockInternships[application.internshipId];
+            const company = mockCompanies[internship.companyId];
+            const isExpanded = expandedApplication === application.id;
+
+            return (
+              <div
+                key={application.id}
+                className="bg-white rounded-lg border overflow-hidden hover:shadow-md transition-shadow duration-200"
+              >
+                <div className="p-6">
+                  <div className="sm:flex sm:items-center sm:justify-between">
+                    <div className="sm:flex sm:items-center">
+                      <div className="mb-4 sm:mb-0 sm:mr-4">
+                        <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center">
+                          {company.logoUrl ? (
+                            <img
+                              src={company.logoUrl}
+                              alt={company.name}
+                              className="w-12 h-12 rounded-full"
+                            />
+                          ) : (
                             <Building className="h-6 w-6 text-gray-500" />
-                          </div>
-                        </div>
-                        <div className="ml-4">
-                          <h4 className="text-lg font-medium text-gray-900">
-                            {internship.title}
-                          </h4>
-                          <p className="text-sm text-gray-500">{company.name}</p>
+                          )}
                         </div>
                       </div>
-                      <div className="flex items-center space-x-2">
-                        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(application.status)}`}>
-                          {getStatusIcon(application.status)}
-                          <span className="ml-1">{getStatusText(application.status)}</span>
-                        </span>
-                        <button
-                          onClick={() => setExpandedApplication(expandedApplication === application.id ? null : application.id)}
-                          className="text-gray-400 hover:text-gray-500"
-                        >
-                          <ChevronDown className={`h-5 w-5 transform transition-transform ${expandedApplication === application.id ? 'rotate-180' : ''}`} />
-                        </button>
+                      <div>
+                        <h3 className="text-lg font-medium text-gray-900">
+                          {internship.title}
+                        </h3>
+                        <p className="text-sm text-gray-600">{company.name}</p>
                       </div>
                     </div>
+                    <div className="mt-4 sm:mt-0 flex items-center">
+                      <span
+                        className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${getStatusColor(
+                          application.status
+                        )}`}
+                      >
+                        {getStatusIcon(application.status)}
+                        <span className="ml-2">{getStatusText(application.status)}</span>
+                      </span>
+                    </div>
+                  </div>
 
-                    {expandedApplication === application.id && (
-                      <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                        <div className="sm:col-span-1">
-                          <div className="flex items-center text-sm text-gray-500">
-                            <MapPin className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" />
-                            <span>{internship.location}{internship.isRemote ? ' (リモート可)' : ''}</span>
-                          </div>
-                          <div className="mt-2 flex items-center text-sm text-gray-500">
-                            <DollarSign className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" />
-                            <span>時給 {internship.salary.amount}円</span>
+                  <div className="mt-4 grid grid-cols-1 sm:grid-cols-3 gap-4 text-sm text-gray-600">
+                    <div className="flex items-center">
+                      <MapPin className="h-4 w-4 mr-2 text-gray-400" />
+                      <span>
+                        {internship.location}
+                        {internship.isRemote && ' (リモート可)'}
+                      </span>
+                    </div>
+                    <div className="flex items-center">
+                      <DollarSign className="h-4 w-4 mr-2 text-gray-400" />
+                      <span>¥{internship.salary.amount}/{internship.salary.period === 'hourly' ? '時間' : '月'}</span>
+                    </div>
+                    <div className="flex items-center">
+                      <Clock className="h-4 w-4 mr-2 text-gray-400" />
+                      <span>応募日: {formatDate(application.appliedAt)}</span>
+                    </div>
+                  </div>
+
+                  <div className="mt-4 flex flex-wrap gap-2">
+                    {internship.skills.map((skill, index) => (
+                      <span
+                        key={index}
+                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+
+                  <div className="mt-4 flex justify-between items-center">
+                    <button
+                      onClick={() => setExpandedApplication(isExpanded ? null : application.id)}
+                      className="text-sm text-blue-600 hover:text-blue-800 font-medium flex items-center"
+                    >
+                      {isExpanded ? '閉じる' : '詳細を見る'}
+                      <ChevronDown
+                        className={`h-4 w-4 ml-1 transform transition-transform ${
+                          isExpanded ? 'rotate-180' : ''
+                        }`}
+                      />
+                    </button>
+                    <Link
+                      to={`/internship/${internship.id}`}
+                      className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
+                    >
+                      募集要項を見る
+                    </Link>
+                  </div>
+
+                  {isExpanded && (
+                    <div className="mt-4 pt-4 border-t">
+                      <div className="space-y-4">
+                        <div>
+                          <h4 className="font-medium text-gray-900">応募の進捗状況</h4>
+                          <div className="mt-2 space-y-2">
+                            <div className="flex items-center text-sm text-gray-600">
+                              <CheckCircle className="h-4 w-4 text-green-500 mr-2" />
+                              <span>応募日: {formatDate(application.appliedAt)}</span>
+                            </div>
+                            {application.status === 'reviewing' && (
+                              <div className="flex items-center text-sm text-gray-600">
+                                <Eye className="h-4 w-4 text-blue-500 mr-2" />
+                                <span>審査開始日: {formatDate(application.updatedAt)}</span>
+                              </div>
+                            )}
                           </div>
                         </div>
-                        <div className="sm:col-span-1">
-                          <div className="flex items-center text-sm text-gray-500">
-                            <Clock className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" />
-                            <span>応募日: {formatDate(application.appliedAt)}</span>
-                          </div>
-                          <div className="mt-2 flex items-center text-sm text-gray-500">
-                            <Clock className="flex-shrink-0 mr-1.5 h-5 w-5 text-gray-400" />
-                            <span>最終更新: {formatDate(application.updatedAt)}</span>
-                          </div>
+
+                        <div>
+                          <h4 className="font-medium text-gray-900">次のステップ</h4>
+                          <p className="mt-1 text-sm text-gray-600">
+                            {application.status === 'pending' &&
+                              '応募書類を受け付けました。企業による審査をお待ちください。'}
+                            {application.status === 'reviewing' &&
+                              '現在、企業が応募書類を確認しています。追加情報を求められる場合があります。'}
+                            {application.status === 'interview' &&
+                              'おめでとうございます！企業が面接を希望しています。メールをご確認ください。'}
+                            {application.status === 'accepted' &&
+                              'おめでとうございます！応募が承認されました。'}
+                            {application.status === 'rejected' &&
+                              '申し訳ありませんが、今回は他の候補者が選ばれました。'}
+                          </p>
                         </div>
-                        <div className="sm:col-span-2">
-                          <div className="flex space-x-3">
-                            <Link
-                              to={`/internship/${internship.id}`}
-                              className="inline-flex items-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
-                            >
-                              詳細を見る
-                            </Link>
-                            <button
-                              type="button"
-                              className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
-                            >
-                              企業に問い合わせる
-                            </button>
-                          </div>
+
+                        <div className="flex space-x-3">
+                          <button className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
+                            企業に連絡
+                          </button>
+                          <button className="inline-flex items-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                            応募内容を確認
+                          </button>
                         </div>
                       </div>
-                    )}
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })
+        )}
+      </div>
     </div>
   );
 };

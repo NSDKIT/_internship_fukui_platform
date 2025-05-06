@@ -9,7 +9,7 @@ const StudentProfile = () => {
           <div className="p-3 bg-blue-100 rounded-full">
             <User className="w-8 h-8 text-blue-600" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-800">プロフィール設定</h1>
+          <h1 className="text-2xl font-bold text-gray-800">学生プロフィール</h1>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
@@ -44,16 +44,16 @@ const StudentProfile = () => {
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">学部・学科</label>
+              <label className="block text-sm font-medium text-gray-700">専攻</label>
               <input
                 type="text"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                placeholder="工学部 情報工学科"
+                placeholder="情報工学"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">卒業予定年度</label>
+              <label className="block text-sm font-medium text-gray-700">卒業予定年</label>
               <input
                 type="number"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -62,11 +62,11 @@ const StudentProfile = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">スキル・資格</label>
+              <label className="block text-sm font-medium text-gray-700">スキル</label>
               <textarea
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 rows={3}
-                placeholder="あなたの持っているスキルや資格を入力してください"
+                placeholder="あなたの主要なスキルを入力してください..."
               />
             </div>
           </div>

@@ -21,25 +21,25 @@ const InternshipDetails: React.FC = () => {
         const mockInternship: Internship = {
           id: '101',
           companyId: 'c1',
-          title: 'Frontend Developer Intern',
-          description: 'Join our dynamic team as a frontend developer intern. You will work closely with senior developers to build and maintain modern web applications using React and TypeScript. This is a great opportunity to gain hands-on experience in a fast-paced startup environment.',
+          title: 'フロントエンド開発インターン',
+          description: '当社の開発チームに参加し、フロントエンド開発インターンとして活動していただきます。シニア開発者と密接に協力しながら、ReactとTypeScriptを使用したモダンなWebアプリケーションの構築とメンテナンスを行います。これは急成長中のスタートアップ環境で実践的な経験を積む絶好の機会です。',
           requirements: [
-            'Currently pursuing a degree in Computer Science or related field',
-            'Strong understanding of HTML, CSS, and JavaScript',
-            'Familiarity with React and modern frontend development practices',
-            'Good problem-solving skills and attention to detail',
-            'Ability to work both independently and as part of a team',
-            'Basic understanding of version control systems (Git)'
+            '情報工学または関連分野を専攻中の学生',
+            'HTML、CSS、JavaScriptの基本的な理解',
+            'Reactとモダンなフロントエンド開発手法への理解',
+            '優れた問題解決能力と細部への注意力',
+            '個人作業とチーム作業の両方が可能な方',
+            'バージョン管理システム（Git）の基本的な理解'
           ],
           responsibilities: [
-            'Develop and maintain frontend components using React and TypeScript',
-            'Collaborate with the design team to implement user interfaces',
-            'Write clean, maintainable, and efficient code',
-            'Participate in code reviews and team meetings',
-            'Help identify and fix bugs',
-            'Document code and development processes'
+            'ReactとTypeScriptを使用したフロントエンドコンポーネントの開発とメンテナンス',
+            'デザインチームと協力してユーザーインターフェースを実装',
+            'クリーンで保守可能な効率的なコードの作成',
+            'コードレビューとチームミーティングへの参加',
+            'バグの特定と修正',
+            'コードと開発プロセスのドキュメント化'
           ],
-          location: 'Tokyo',
+          location: '東京',
           isRemote: true,
           salary: {
             amount: 2000,
@@ -49,7 +49,7 @@ const InternshipDetails: React.FC = () => {
           endDate: new Date(Date.now() + 120 * 24 * 60 * 60 * 1000).toISOString(),
           hoursPerWeek: 20,
           applicationDeadline: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-          industry: 'Technology',
+          industry: 'テクノロジー',
           skills: ['React', 'TypeScript', 'HTML', 'CSS', 'Git', 'REST APIs'],
           status: 'published',
           createdAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
@@ -62,7 +62,7 @@ const InternshipDetails: React.FC = () => {
           setIsLoading(false);
         }, 1000);
       } catch (error) {
-        console.error('Error fetching internship:', error);
+        console.error('インターンシップの取得に失敗:', error);
         setIsLoading(false);
       }
     };
@@ -77,7 +77,7 @@ const InternshipDetails: React.FC = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       setHasApplied(true);
     } catch (error) {
-      console.error('Error applying to internship:', error);
+      console.error('インターンシップへの応募に失敗:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -92,15 +92,15 @@ const InternshipDetails: React.FC = () => {
       <div className="py-8">
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <h1 className="text-2xl font-bold text-gray-900">Internship Not Found</h1>
+            <h1 className="text-2xl font-bold text-gray-900">インターンシップが見つかりません</h1>
             <p className="mt-2 text-gray-600">
-              The internship you're looking for doesn't exist or has been removed.
+              お探しのインターンシップは存在しないか、削除された可能性があります。
             </p>
             <Link
               to="/student/search"
               className="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
             >
-              Browse Internships
+              インターンシップを探す
             </Link>
           </div>
         </div>
@@ -109,7 +109,7 @@ const InternshipDetails: React.FC = () => {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+    return new Date(dateString).toLocaleDateString('ja-JP', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
@@ -119,12 +119,12 @@ const InternshipDetails: React.FC = () => {
   return (
     <div className="py-8">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumbs */}
-        <nav className="flex mb-8" aria-label="Breadcrumb">
+        {/* パンくずリスト */}
+        <nav className="flex mb-8" aria-label="パンくずリスト">
           <ol className="flex items-center space-x-2">
             <li>
               <Link to="/student/search" className="text-gray-500 hover:text-gray-700">
-                Internships
+                インターンシップ一覧
               </Link>
             </li>
             <ChevronRight className="h-4 w-4 text-gray-400" />
@@ -134,7 +134,7 @@ const InternshipDetails: React.FC = () => {
           </ol>
         </nav>
 
-        {/* Header */}
+        {/* ヘッダー */}
         <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
           <div className="flex justify-between items-start">
             <div>
@@ -143,7 +143,7 @@ const InternshipDetails: React.FC = () => {
               </h1>
               <div className="flex items-center text-gray-600 mb-4">
                 <Building className="h-5 w-5 mr-2" />
-                <span className="font-medium">TechCorp Inc.</span>
+                <span className="font-medium">テックコープ株式会社</span>
               </div>
             </div>
             {user?.userType === 'student' && (
@@ -151,7 +151,7 @@ const InternshipDetails: React.FC = () => {
                 {hasApplied ? (
                   <div className="flex items-center text-green-600">
                     <CheckCircle className="h-5 w-5 mr-2" />
-                    <span className="font-medium">Applied</span>
+                    <span className="font-medium">応募済み</span>
                   </div>
                 ) : (
                   <button
@@ -161,7 +161,7 @@ const InternshipDetails: React.FC = () => {
                       isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
                     }`}
                   >
-                    {isSubmitting ? 'Applying...' : 'Apply Now'}
+                    {isSubmitting ? '応募中...' : '応募する'}
                   </button>
                 )}
               </div>
@@ -174,17 +174,17 @@ const InternshipDetails: React.FC = () => {
               <span>{internship.location}</span>
               {internship.isRemote && (
                 <span className="ml-2 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                  Remote Available
+                  リモート可
                 </span>
               )}
             </div>
             <div className="flex items-center text-gray-600">
               <DollarSign className="h-5 w-5 mr-2 text-gray-400" />
-              <span>¥{internship.salary.amount}/{internship.salary.period}</span>
+              <span>¥{internship.salary.amount}/{internship.salary.period === 'hourly' ? '時間' : '月'}</span>
             </div>
             <div className="flex items-center text-gray-600">
               <Clock className="h-5 w-5 mr-2 text-gray-400" />
-              <span>{internship.hoursPerWeek} hours/week</span>
+              <span>{internship.hoursPerWeek}時間/週</span>
             </div>
             <div className="flex items-center text-gray-600">
               <Calendar className="h-5 w-5 mr-2 text-gray-400" />
@@ -197,23 +197,23 @@ const InternshipDetails: React.FC = () => {
           <div className="mt-6 flex items-center">
             <Clock className="h-5 w-5 mr-2 text-red-500" />
             <span className="text-red-600 font-medium">
-              Application Deadline: {formatDate(internship.applicationDeadline)}
+              応募締切: {formatDate(internship.applicationDeadline)}
             </span>
           </div>
         </div>
 
-        {/* Description */}
+        {/* 説明 */}
         <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">About the Internship</h2>
+          <h2 className="text-lg font-bold text-gray-900 mb-4">インターンシップの概要</h2>
           <p className="text-gray-600 whitespace-pre-line">
             {internship.description}
           </p>
         </div>
 
-        {/* Requirements and Responsibilities */}
+        {/* 応募要件と職務内容 */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
           <div className="bg-white rounded-lg shadow-sm border p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">Requirements</h2>
+            <h2 className="text-lg font-bold text-gray-900 mb-4">応募要件</h2>
             <ul className="space-y-3">
               {internship.requirements.map((requirement, index) => (
                 <li key={index} className="flex items-start">
@@ -225,7 +225,7 @@ const InternshipDetails: React.FC = () => {
           </div>
 
           <div className="bg-white rounded-lg shadow-sm border p-6">
-            <h2 className="text-lg font-bold text-gray-900 mb-4">Responsibilities</h2>
+            <h2 className="text-lg font-bold text-gray-900 mb-4">職務内容</h2>
             <ul className="space-y-3">
               {internship.responsibilities.map((responsibility, index) => (
                 <li key={index} className="flex items-start">
@@ -237,9 +237,9 @@ const InternshipDetails: React.FC = () => {
           </div>
         </div>
 
-        {/* Skills */}
+        {/* スキル */}
         <div className="bg-white rounded-lg shadow-sm border p-6 mb-8">
-          <h2 className="text-lg font-bold text-gray-900 mb-4">Required Skills</h2>
+          <h2 className="text-lg font-bold text-gray-900 mb-4">必要なスキル</h2>
           <div className="flex flex-wrap gap-2">
             {internship.skills.map((skill, index) => (
               <span
@@ -252,7 +252,7 @@ const InternshipDetails: React.FC = () => {
           </div>
         </div>
 
-        {/* Apply Button */}
+        {/* 応募ボタン */}
         {user?.userType === 'student' && !hasApplied && (
           <div className="bg-gray-50 border-t fixed bottom-0 left-0 right-0 p-4">
             <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -263,7 +263,7 @@ const InternshipDetails: React.FC = () => {
                   isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
                 }`}
               >
-                {isSubmitting ? 'Applying...' : 'Apply for this Internship'}
+                {isSubmitting ? '応募中...' : 'このインターンシップに応募する'}
               </button>
             </div>
           </div>

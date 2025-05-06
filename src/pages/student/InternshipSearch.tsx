@@ -17,9 +17,9 @@ const InternshipSearch: React.FC = () => {
       company: 'テックコープ',
       location: '東京',
       isRemote: true,
-      salary: '2000円/時',
+      salary: '¥2000/時間',
       deadline: '2025-04-01',
-      description: '私たちの活気のあるチームでフロントエンド開発インターンとして働きませんか...',
+      description: '当社の開発チームに参加し、フロントエンド開発インターンとして...',
       skills: ['React', 'TypeScript', 'CSS'],
       industry: 'テクノロジー'
     },
@@ -29,13 +29,12 @@ const InternshipSearch: React.FC = () => {
       company: 'グローバルブランド',
       location: '大阪',
       isRemote: false,
-      salary: '1800円/時',
+      salary: '¥1800/時間',
       deadline: '2025-03-15',
       description: 'マーケティング戦略の開発と実施をサポート...',
-      skills: ['SNSマーケティング', 'コンテンツ制作', '分析'],
+      skills: ['SNSマーケティング', 'コンテンツ作成', '分析'],
       industry: 'マーケティング'
     },
-    // Add more mock internships as needed
   ];
 
   const industries = [
@@ -74,9 +73,9 @@ const InternshipSearch: React.FC = () => {
   return (
     <div className="py-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">インターンシップを探す</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">理想のインターンシップを見つける</h1>
         <p className="text-gray-600">
-          あなたのスキルと興味に合った数百のインターンシップの中から、理想の機会を見つけましょう。
+          あなたのスキルと興味に合った数百のインターンシップ機会から探すことができます。
         </p>
       </div>
 
@@ -87,7 +86,7 @@ const InternshipSearch: React.FC = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
                 type="text"
-                placeholder="職種、企業名、キーワードで検索"
+                placeholder="タイトル、企業名、またはキーワードで検索"
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -99,7 +98,7 @@ const InternshipSearch: React.FC = () => {
             className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
           >
             <Filter className="h-5 w-5 mr-2" />
-            絞り込み
+            フィルター
           </button>
         </div>
 
@@ -113,7 +112,7 @@ const InternshipSearch: React.FC = () => {
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                 >
-                  <option value="">すべての地域</option>
+                  <option value="">すべての勤務地</option>
                   {locations.map(loc => (
                     <option key={loc} value={loc}>{loc}</option>
                   ))}
@@ -145,7 +144,7 @@ const InternshipSearch: React.FC = () => {
                     className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
                   <label htmlFor="remote" className="ml-2 text-sm text-gray-700">
-                    リモートワーク可
+                    リモート可
                   </label>
                 </div>
               </div>
@@ -191,7 +190,7 @@ const InternshipSearch: React.FC = () => {
                 </div>
                 <div className="flex items-center">
                   <Clock className="h-4 w-4 mr-1 text-gray-400" />
-                  <span>応募締切: {new Date(internship.deadline).toLocaleDateString()}</span>
+                  <span>締切: {new Date(internship.deadline).toLocaleDateString('ja-JP')}</span>
                 </div>
                 {internship.isRemote && (
                   <div className="flex items-center">
@@ -219,9 +218,9 @@ const InternshipSearch: React.FC = () => {
         {filteredInternships.length === 0 && (
           <div className="text-center py-12 bg-white rounded-lg border">
             <Search className="mx-auto h-12 w-12 text-gray-400" />
-            <h3 className="mt-2 text-lg font-medium text-gray-900">No results found</h3>
+            <h3 className="mt-2 text-lg font-medium text-gray-900">検索結果なし</h3>
             <p className="mt-1 text-gray-500">
-              Try adjusting your search or filter criteria to find more opportunities.
+              検索条件やフィルターを調整して、より多くの機会を見つけてください。
             </p>
           </div>
         )}

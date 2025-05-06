@@ -20,11 +20,11 @@ const ManageInternships: React.FC = () => {
           {
             id: '101',
             companyId: 'c1',
-            title: 'Frontend Developer Intern',
-            description: 'Join our team as a frontend developer intern...',
+            title: 'フロントエンド開発インターン',
+            description: '当社のチームに参加し、フロントエンド開発インターンとして...',
             requirements: ['React', 'JavaScript', 'CSS'],
-            responsibilities: ['Building user interfaces', 'Implementing responsive designs'],
-            location: 'Tokyo',
+            responsibilities: ['ユーザーインターフェースの構築', 'レスポンシブデザインの実装'],
+            location: '東京',
             isRemote: false,
             salary: {
               amount: 20,
@@ -34,13 +34,12 @@ const ManageInternships: React.FC = () => {
             endDate: new Date(Date.now() + 120 * 24 * 60 * 60 * 1000).toISOString(),
             hoursPerWeek: 20,
             applicationDeadline: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
-            industry: 'Technology',
+            industry: 'テクノロジー',
             skills: ['React', 'TypeScript', 'Tailwind CSS'],
             status: 'published',
             createdAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
             updatedAt: new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString(),
           },
-          // Add more mock internships as needed
         ];
 
         const mockApplications: Application[] = [
@@ -52,7 +51,6 @@ const ManageInternships: React.FC = () => {
             appliedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
             updatedAt: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
           },
-          // Add more mock applications as needed
         ];
 
         // Simulate loading delay
@@ -62,7 +60,7 @@ const ManageInternships: React.FC = () => {
           setIsLoading(false);
         }, 1000);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('データの取得に失敗:', error);
         setIsLoading(false);
       }
     };
@@ -75,9 +73,9 @@ const ManageInternships: React.FC = () => {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+    return new Date(dateString).toLocaleDateString('ja-JP', {
       year: 'numeric',
-      month: 'short',
+      month: 'long',
       day: 'numeric',
     });
   };
@@ -90,9 +88,9 @@ const ManageInternships: React.FC = () => {
     <div className="py-8">
       <div className="flex justify-between items-center mb-8">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900 mb-2">Manage Internships</h1>
+          <h1 className="text-2xl font-bold text-gray-900 mb-2">インターンシップ管理</h1>
           <p className="text-gray-600">
-            View and manage your internship postings and applications.
+            インターンシップの掲載と応募者の管理ができます。
           </p>
         </div>
         <Link
@@ -100,7 +98,7 @@ const ManageInternships: React.FC = () => {
           className="inline-flex items-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
         >
           <Plus className="h-5 w-5 mr-2" />
-          Create New Internship
+          新規インターンシップを作成
         </Link>
       </div>
 
@@ -110,23 +108,23 @@ const ManageInternships: React.FC = () => {
           className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
         >
           <Filter className="h-5 w-5 mr-2" />
-          Filters
+          フィルター
         </button>
 
         {showFilters && (
           <div className="mt-4 p-4 bg-white rounded-lg border">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Status</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">ステータス</label>
                 <select
                   className="w-full border border-gray-300 rounded-md shadow-sm py-2 pl-3 pr-10 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   value={selectedFilter}
                   onChange={(e) => setSelectedFilter(e.target.value)}
                 >
-                  <option value="all">All Internships</option>
-                  <option value="published">Published</option>
-                  <option value="draft">Draft</option>
-                  <option value="closed">Closed</option>
+                  <option value="all">すべて</option>
+                  <option value="published">公開中</option>
+                  <option value="draft">下書き</option>
+                  <option value="closed">終了</option>
                 </select>
               </div>
             </div>
@@ -150,7 +148,7 @@ const ManageInternships: React.FC = () => {
                       <MapPin className="h-4 w-4 mr-1" />
                       <span>{internship.location}</span>
                       {internship.isRemote && (
-                        <span className="ml-2 text-green-600">(Remote available)</span>
+                        <span className="ml-2 text-green-600">(リモート可)</span>
                       )}
                     </div>
                   </div>
@@ -160,29 +158,29 @@ const ManageInternships: React.FC = () => {
                       className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
                     >
                       <Eye className="h-4 w-4 mr-1" />
-                      View
+                      表示
                     </Link>
                     <button className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                      Edit
+                      編集
                     </button>
                   </div>
                 </div>
 
                 <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
                   <div>
-                    <h3 className="text-sm font-medium text-gray-500">Applications</h3>
+                    <h3 className="text-sm font-medium text-gray-500">応募数</h3>
                     <p className="mt-1 text-lg font-semibold text-gray-900">
                       {internshipApplications.length}
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-sm font-medium text-gray-500">Deadline</h3>
+                    <h3 className="text-sm font-medium text-gray-500">応募締切</h3>
                     <p className="mt-1 text-lg font-semibold text-gray-900">
                       {formatDate(internship.applicationDeadline)}
                     </p>
                   </div>
                   <div>
-                    <h3 className="text-sm font-medium text-gray-500">Status</h3>
+                    <h3 className="text-sm font-medium text-gray-500">ステータス</h3>
                     <p className="mt-1">
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${
                         internship.status === 'published'
@@ -191,14 +189,14 @@ const ManageInternships: React.FC = () => {
                           ? 'bg-gray-100 text-gray-800'
                           : 'bg-red-100 text-red-800'
                       }`}>
-                        {internship.status.charAt(0).toUpperCase() + internship.status.slice(1)}
+                        {internship.status === 'published' ? '公開中' : internship.status === 'draft' ? '下書き' : '終了'}
                       </span>
                     </p>
                   </div>
                 </div>
 
                 <div className="mt-6">
-                  <h3 className="text-sm font-medium text-gray-900 mb-3">Recent Applications</h3>
+                  <h3 className="text-sm font-medium text-gray-900 mb-3">最近の応募</h3>
                   {internshipApplications.length > 0 ? (
                     <div className="space-y-3">
                       {internshipApplications.slice(0, 3).map((application) => (
@@ -211,22 +209,22 @@ const ManageInternships: React.FC = () => {
                               <User className="h-4 w-4 text-gray-500" />
                             </div>
                             <div className="ml-3">
-                              <p className="text-sm font-medium text-gray-900">Student Name</p>
+                              <p className="text-sm font-medium text-gray-900">学生名</p>
                               <p className="text-xs text-gray-500">
-                                Applied {formatDate(application.appliedAt)}
+                                応募日: {formatDate(application.appliedAt)}
                               </p>
                             </div>
                           </div>
                           <div className="flex items-center space-x-2">
                             <button className="inline-flex items-center px-2 py-1 text-xs font-medium rounded-md text-blue-700 bg-blue-50 hover:bg-blue-100">
-                              Review
+                              確認する
                             </button>
                           </div>
                         </div>
                       ))}
                     </div>
                   ) : (
-                    <p className="text-sm text-gray-500">No applications yet</p>
+                    <p className="text-sm text-gray-500">まだ応募はありません</p>
                   )}
                 </div>
               </div>
@@ -237,9 +235,9 @@ const ManageInternships: React.FC = () => {
         {internships.length === 0 && (
           <div className="text-center py-12 bg-white rounded-lg border">
             <Building className="mx-auto h-12 w-12 text-gray-400" />
-            <h3 className="mt-2 text-lg font-medium text-gray-900">No internships found</h3>
+            <h3 className="mt-2 text-lg font-medium text-gray-900">インターンシップがありません</h3>
             <p className="mt-1 text-gray-500">
-              Get started by creating your first internship posting.
+              最初のインターンシップを作成してみましょう。
             </p>
             <div className="mt-6">
               <Link
@@ -247,7 +245,7 @@ const ManageInternships: React.FC = () => {
                 className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
               >
                 <Plus className="h-5 w-5 mr-2" />
-                Create New Internship
+                新規インターンシップを作成
               </Link>
             </div>
           </div>

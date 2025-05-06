@@ -18,7 +18,7 @@ const CreateInternship: React.FC = () => {
       await new Promise(resolve => setTimeout(resolve, 1000));
       navigate('/company/manage-internships');
     } catch (error) {
-      console.error('Error creating internship:', error);
+      console.error('インターンシップの作成に失敗:', error);
     } finally {
       setIsSubmitting(false);
     }
@@ -47,47 +47,47 @@ const CreateInternship: React.FC = () => {
   return (
     <div className="py-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Create New Internship</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">新規インターンシップの作成</h1>
         <p className="text-gray-600">
-          Post a new internship opportunity and find talented students.
+          新しいインターンシップを掲載して、優秀な学生を見つけましょう。
         </p>
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-8">
-        {/* Basic Information */}
+        {/* 基本情報 */}
         <div className="bg-white rounded-lg shadow-sm border p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Basic Information</h2>
+          <h2 className="text-lg font-medium text-gray-900 mb-4">基本情報</h2>
           <div className="grid grid-cols-1 gap-6">
             <div>
               <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-                Internship Title
+                インターンシップタイトル
               </label>
               <input
                 type="text"
                 id="title"
                 required
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                placeholder="e.g., Frontend Developer Intern"
+                placeholder="例：フロントエンド開発インターン"
               />
             </div>
 
             <div>
               <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-                Description
+                説明
               </label>
               <textarea
                 id="description"
                 rows={4}
                 required
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                placeholder="Describe the internship opportunity..."
+                placeholder="インターンシップの内容について説明してください..."
               />
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="location" className="block text-sm font-medium text-gray-700">
-                  Location
+                  勤務地
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -98,14 +98,14 @@ const CreateInternship: React.FC = () => {
                     id="location"
                     required
                     className="block w-full pl-10 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                    placeholder="e.g., Tokyo, Japan"
+                    placeholder="例：東京都渋谷区"
                   />
                 </div>
               </div>
 
               <div>
                 <label htmlFor="workType" className="block text-sm font-medium text-gray-700">
-                  Work Type
+                  勤務形態
                 </label>
                 <div className="mt-1 relative rounded-md shadow-sm">
                   <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -116,9 +116,9 @@ const CreateInternship: React.FC = () => {
                     required
                     className="block w-full pl-10 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   >
-                    <option value="onsite">On-site only</option>
-                    <option value="remote">Remote only</option>
-                    <option value="hybrid">Hybrid</option>
+                    <option value="onsite">オフィスワークのみ</option>
+                    <option value="remote">リモートワークのみ</option>
+                    <option value="hybrid">ハイブリッド</option>
                   </select>
                 </div>
               </div>
@@ -126,13 +126,13 @@ const CreateInternship: React.FC = () => {
           </div>
         </div>
 
-        {/* Duration and Schedule */}
+        {/* 期間とスケジュール */}
         <div className="bg-white rounded-lg shadow-sm border p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Duration and Schedule</h2>
+          <h2 className="text-lg font-medium text-gray-900 mb-4">期間とスケジュール</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="startDate" className="block text-sm font-medium text-gray-700">
-                Start Date
+                開始日
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -149,7 +149,7 @@ const CreateInternship: React.FC = () => {
 
             <div>
               <label htmlFor="endDate" className="block text-sm font-medium text-gray-700">
-                End Date
+                終了日
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -166,7 +166,7 @@ const CreateInternship: React.FC = () => {
 
             <div>
               <label htmlFor="hoursPerWeek" className="block text-sm font-medium text-gray-700">
-                Hours per Week
+                週間勤務時間
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -179,14 +179,14 @@ const CreateInternship: React.FC = () => {
                   min="1"
                   max="40"
                   className="block w-full pl-10 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="e.g., 20"
+                  placeholder="例：20"
                 />
               </div>
             </div>
 
             <div>
               <label htmlFor="applicationDeadline" className="block text-sm font-medium text-gray-700">
-                Application Deadline
+                応募締切日
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -203,13 +203,13 @@ const CreateInternship: React.FC = () => {
           </div>
         </div>
 
-        {/* Compensation */}
+        {/* 給与 */}
         <div className="bg-white rounded-lg shadow-sm border p-6">
-          <h2 className="text-lg font-medium text-gray-900 mb-4">Compensation</h2>
+          <h2 className="text-lg font-medium text-gray-900 mb-4">給与</h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="salary" className="block text-sm font-medium text-gray-700">
-                Salary Amount
+                給与額
               </label>
               <div className="mt-1 relative rounded-md shadow-sm">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -222,38 +222,38 @@ const CreateInternship: React.FC = () => {
                   min="0"
                   step="0.01"
                   className="block w-full pl-10 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="e.g., 2000"
+                  placeholder="例：2000"
                 />
               </div>
             </div>
 
             <div>
               <label htmlFor="salaryPeriod" className="block text-sm font-medium text-gray-700">
-                Payment Period
+                支払い期間
               </label>
               <select
                 id="salaryPeriod"
                 required
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
               >
-                <option value="hourly">Per Hour</option>
-                <option value="monthly">Per Month</option>
+                <option value="hourly">時給</option>
+                <option value="monthly">月給</option>
               </select>
             </div>
           </div>
         </div>
 
-        {/* Requirements */}
+        {/* 応募要件 */}
         <div className="bg-white rounded-lg shadow-sm border p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-medium text-gray-900">Requirements</h2>
+            <h2 className="text-lg font-medium text-gray-900">応募要件</h2>
             <button
               type="button"
               onClick={() => addListItem(requirements, setRequirements)}
               className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
             >
               <Plus className="h-4 w-4 mr-1" />
-              Add Requirement
+              要件を追加
             </button>
           </div>
           <div className="space-y-3">
@@ -264,7 +264,7 @@ const CreateInternship: React.FC = () => {
                   value={requirement}
                   onChange={(e) => updateListItem(index, e.target.value, requirements, setRequirements)}
                   className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Enter a requirement"
+                  placeholder="応募要件を入力"
                 />
                 {requirements.length > 1 && (
                   <button
@@ -280,17 +280,17 @@ const CreateInternship: React.FC = () => {
           </div>
         </div>
 
-        {/* Responsibilities */}
+        {/* 職務内容 */}
         <div className="bg-white rounded-lg shadow-sm border p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-medium text-gray-900">Responsibilities</h2>
+            <h2 className="text-lg font-medium text-gray-900">職務内容</h2>
             <button
               type="button"
               onClick={() => addListItem(responsibilities, setResponsibilities)}
               className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
             >
               <Plus className="h-4 w-4 mr-1" />
-              Add Responsibility
+              職務を追加
             </button>
           </div>
           <div className="space-y-3">
@@ -301,7 +301,7 @@ const CreateInternship: React.FC = () => {
                   value={responsibility}
                   onChange={(e) => updateListItem(index, e.target.value, responsibilities, setResponsibilities)}
                   className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Enter a responsibility"
+                  placeholder="職務内容を入力"
                 />
                 {responsibilities.length > 1 && (
                   <button
@@ -317,17 +317,17 @@ const CreateInternship: React.FC = () => {
           </div>
         </div>
 
-        {/* Skills */}
+        {/* 必要なスキル */}
         <div className="bg-white rounded-lg shadow-sm border p-6">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-lg font-medium text-gray-900">Required Skills</h2>
+            <h2 className="text-lg font-medium text-gray-900">必要なスキル</h2>
             <button
               type="button"
               onClick={() => addListItem(skills, setSkills)}
               className="inline-flex items-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50"
             >
               <Plus className="h-4 w-4 mr-1" />
-              Add Skill
+              スキルを追加
             </button>
           </div>
           <div className="space-y-3">
@@ -338,7 +338,7 @@ const CreateInternship: React.FC = () => {
                   value={skill}
                   onChange={(e) => updateListItem(index, e.target.value, skills, setSkills)}
                   className="flex-1 rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  placeholder="Enter a skill"
+                  placeholder="必要なスキルを入力"
                 />
                 {skills.length > 1 && (
                   <button
@@ -354,14 +354,14 @@ const CreateInternship: React.FC = () => {
           </div>
         </div>
 
-        {/* Submit Buttons */}
+        {/* 送信ボタン */}
         <div className="flex justify-end space-x-3">
           <button
             type="button"
             onClick={() => navigate('/company/manage-internships')}
             className="px-4 py-2 border border-gray-300 rounded-md text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500"
           >
-            Cancel
+            キャンセル
           </button>
           <button
             type="submit"
@@ -370,7 +370,7 @@ const CreateInternship: React.FC = () => {
               isSubmitting ? 'opacity-75 cursor-not-allowed' : ''
             }`}
           >
-            {isSubmitting ? 'Creating...' : 'Create Internship'}
+            {isSubmitting ? '作成中...' : 'インターンシップを作成'}
           </button>
         </div>
       </form>
