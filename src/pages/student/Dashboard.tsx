@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Eye, Clock, CheckCircle, XCircle, Briefcase, ArrowUpRight, User, BookOpen } from 'lucide-react';
+import { Eye, Clock, CheckCircle, XCircle, Briefcase, ArrowUpRight, User, BookOpen, Building } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 import { Application, Internship, Scout } from '../../types';
 import LoadingSpinner from '../../components/ui/LoadingSpinner';
