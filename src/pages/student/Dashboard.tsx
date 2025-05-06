@@ -140,6 +140,8 @@ const StudentDashboard: React.FC = () => {
   const [applications, setApplications] = useState<Application[]>([]);
   const [scouts, setScouts] = useState<Scout[]>([]);
   const [recommendedInternships, setRecommendedInternships] = useState<Internship[]>([]);
+  const [industryFilter, setIndustryFilter] = useState('');
+  const [skillFilter, setSkillFilter] = useState('');
   
   useEffect(() => {
     // Simulate API calls to fetch data
@@ -206,21 +208,29 @@ const StudentDashboard: React.FC = () => {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+    const options: Intl.DateTimeFormatOptions = {
       year: 'numeric',
-      month: 'short',
-      day: 'numeric',
-    });
+      month: 'long',
+      day: 'numeric'
+    };
+    return new Date(dateString).toLocaleDateString('ja-JP', options);
   };
+
+  // フィルタリングされたインターンシップを取得
+  const filteredInternships = recommendedInternships.filter(internship => {
+    const matchesIndustry = !industryFilter || internship.industry === industryFilter;
+    const matchesSkill = !skillFilter || internship.skills.includes(skillFilter);
+    return matchesIndustry && matchesSkill;
+  });
 
   if (isLoading) {
     return <LoadingSpinner />;
   }
 
   return (
-    <div className="py-8">
+    <div className="py-8" role="main" aria-label="学生ダッシュボード">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">
+        <h1 className="text-2xl font-bold text-gray-900 mb-2" role="heading" aria-level={1}>
           ようこそ、{user?.name}さん！
         </h1>
         <p className="text-gray-600">
@@ -229,43 +239,48 @@ const StudentDashboard: React.FC = () => {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <div className="bg-blue-50 rounded-lg p-6 border border-blue-100">
+        <div className="bg-blue-50 rounded-lg p-6 border border-blue-100" role="region" aria-label="応募状況サマリー">
           <div className="flex items-center text-blue-600 mb-3">
-            <Briefcase className="h-5 w-5 mr-2" />
+            <Briefcase className="h-5 w-5 mr-2" aria-hidden="true" />
             <h3 className="font-semibold">応募状況</h3>
           </div>
-          <p className="text-3xl font-bold">{applications.length}</p>
+          <p className="text-3xl font-bold" aria-label={`${applications.length}件の応募`}>{applications.length}</p>
           <p className="text-sm text-gray-600">応募中のインターンシップ</p>
         </div>
         
-        <div className="bg-purple-50 rounded-lg p-6 border border-purple-100">
+        <div className="bg-purple-50 rounded-lg p-6 border border-purple-100" role="region" aria-label="面接状況サマリー">
           <div className="flex items-center text-purple-600 mb-3">
-            <User className="h-5 w-5 mr-2" />
+            <User className="h-5 w-5 mr-2" aria-hidden="true" />
             <h3 className="font-semibold">面接</h3>
           </div>
-          <p className="text-3xl font-bold">{applications.filter(app => app.status === 'interview').length}</p>
+          <p className="text-3xl font-bold" aria-label={`${applications.filter(app => app.status === 'interview').length}件の面接`}>
+            {applications.filter(app => app.status === 'interview').length}
+          </p>
           <p className="text-sm text-gray-600">面接段階の応募</p>
         </div>
         
-        <div className="bg-green-50 rounded-lg p-6 border border-green-100">
+        <div className="bg-green-50 rounded-lg p-6 border border-green-100" role="region" aria-label="スカウトサマリー">
           <div className="flex items-center text-green-600 mb-3">
-            <BookOpen className="h-5 w-5 mr-2" />
+            <BookOpen className="h-5 w-5 mr-2" aria-hidden="true" />
             <h3 className="font-semibold">新着スカウト</h3>
           </div>
-          <p className="text-3xl font-bold">{scouts.length}</p>
+          <p className="text-3xl font-bold" aria-label={`${scouts.length}件のスカウト`}>{scouts.length}</p>
           <p className="text-sm text-gray-600">企業からのスカウトメッセージ</p>
         </div>
       </div>
 
-      <div className="mb-10">
+      <div className="mb-10" role="region" aria-label="最近の応募一覧">
         <div className="flex justify-between items-center mb-5">
-          <h2 className="text-xl font-bold text-gray-900">最近の応募</h2>
+          <h2 className="text-xl font-bold text-gray-900" role="heading" aria-level={2}>
+            最近の応募
+          </h2>
           <Link 
             to="/student/applications" 
             className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center"
+            aria-label="すべての応募を見る"
           >
             すべて見る
-            <ArrowUpRight className="h-4 w-4 ml-1" />
+            <ArrowUpRight className="h-4 w-4 ml-1" aria-hidden="true" />
           </Link>
         </div>
         
@@ -397,24 +412,54 @@ const StudentDashboard: React.FC = () => {
         )}
       </div>
 
-      <div>
+      <div role="region" aria-label="おすすめのインターンシップ">
         <div className="flex justify-between items-center mb-5">
-          <h2 className="text-xl font-bold text-gray-900">おすすめのインターンシップ</h2>
-          <Link 
-            to="/student/search" 
-            className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center"
-          >
-            すべて見る
-            <ArrowUpRight className="h-4 w-4 ml-1" />
-          </Link>
+          <h2 className="text-xl font-bold text-gray-900" role="heading" aria-level={2}>
+            おすすめのインターンシップ
+          </h2>
+          <div className="flex items-center gap-4">
+            <select
+              className="rounded-md border-gray-300 text-sm"
+              aria-label="業界でフィルター"
+              onChange={(e) => setIndustryFilter(e.target.value)}
+            >
+              <option value="">すべての業界</option>
+              {Array.from(new Set(recommendedInternships.map(i => i.industry))).map(industry => (
+                <option key={industry} value={industry}>{industry}</option>
+              ))}
+            </select>
+            <select
+              className="rounded-md border-gray-300 text-sm"
+              aria-label="スキルでフィルター"
+              onChange={(e) => setSkillFilter(e.target.value)}
+            >
+              <option value="">すべてのスキル</option>
+              {Array.from(new Set(recommendedInternships.flatMap(i => i.skills))).map(skill => (
+                <option key={skill} value={skill}>{skill}</option>
+              ))}
+            </select>
+            <Link 
+              to="/student/search" 
+              className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center"
+              aria-label="すべてのインターンシップを見る"
+            >
+              すべて見る
+              <ArrowUpRight className="h-4 w-4 ml-1" aria-hidden="true" />
+            </Link>
+          </div>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {recommendedInternships.map(internship => {
+          {filteredInternships.map(internship => {
             const company = getCompanyById(internship.companyId);
             
             return (
-              <div key={internship.id} className="bg-white rounded-lg border overflow-hidden hover:shadow-md transition-shadow duration-200">
+              <div 
+                key={internship.id} 
+                className="bg-white rounded-lg border overflow-hidden hover:shadow-md transition-shadow duration-200"
+                role="article"
+                aria-label={`${company.name}の${internship.title}`}
+              >
                 <div className="p-5">
                   <div className="flex justify-between items-start">
                     <div className="w-10 h-10 bg-gray-200 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
@@ -435,7 +480,7 @@ const StudentDashboard: React.FC = () => {
                   <p className="text-sm text-gray-600">{company.name}</p>
                   
                   <div className="mt-3 flex items-center text-sm text-gray-500">
-                    <svg className="h-4 w-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-4 w-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
@@ -443,22 +488,26 @@ const StudentDashboard: React.FC = () => {
                   </div>
                   
                   <div className="mt-2 flex items-center text-sm text-gray-500">
-                    <svg className="h-4 w-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-4 w-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span>{internship.hoursPerWeek} hours/week</span>
+                    <span>週{internship.hoursPerWeek}時間</span>
                   </div>
                   
                   <div className="mt-2 flex items-center text-sm text-gray-500">
-                    <svg className="h-4 w-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <svg className="h-4 w-4 mr-1 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
-                    <span>${internship.salary.amount}/{internship.salary.period}</span>
+                    <span>時給{internship.salary.amount}円</span>
                   </div>
                   
                   <div className="mt-4 flex flex-wrap gap-2">
                     {internship.skills.slice(0, 3).map((skill, index) => (
-                      <span key={index} className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                      <span 
+                        key={index} 
+                        className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800"
+                        role="tag"
+                      >
                         {skill}
                       </span>
                     ))}
@@ -468,12 +517,14 @@ const StudentDashboard: React.FC = () => {
                     <Link
                       to={`/internship/${internship.id}`}
                       className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
+                      aria-label={`${internship.title}の詳細を見る`}
                     >
                       詳細を見る
                     </Link>
                     <Link
-                      to={`/internship/${internship.id}`}
+                      to={`/internship/${internship.id}/apply`}
                       className="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
+                      aria-label={`${internship.title}に応募する`}
                     >
                       応募する
                     </Link>
