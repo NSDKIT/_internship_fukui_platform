@@ -13,50 +13,50 @@ const InternshipSearch: React.FC = () => {
   const internships = [
     {
       id: '1',
-      title: 'Frontend Developer Intern',
-      company: 'TechCorp',
-      location: 'Tokyo',
+      title: 'フロントエンド開発インターン',
+      company: 'テックコープ',
+      location: '東京',
       isRemote: true,
-      salary: '¥2000/hour',
+      salary: '2000円/時',
       deadline: '2025-04-01',
-      description: 'Join our dynamic team as a frontend developer intern...',
+      description: '私たちの活気のあるチームでフロントエンド開発インターンとして働きませんか...',
       skills: ['React', 'TypeScript', 'CSS'],
-      industry: 'Technology'
+      industry: 'テクノロジー'
     },
     {
       id: '2',
-      title: 'Marketing Intern',
-      company: 'GlobalBrand',
-      location: 'Osaka',
+      title: 'マーケティングインターン',
+      company: 'グローバルブランド',
+      location: '大阪',
       isRemote: false,
-      salary: '¥1800/hour',
+      salary: '1800円/時',
       deadline: '2025-03-15',
-      description: 'Assist in developing and implementing marketing strategies...',
-      skills: ['Social Media', 'Content Creation', 'Analytics'],
-      industry: 'Marketing'
+      description: 'マーケティング戦略の開発と実施をサポート...',
+      skills: ['SNSマーケティング', 'コンテンツ制作', '分析'],
+      industry: 'マーケティング'
     },
     // Add more mock internships as needed
   ];
 
   const industries = [
-    'Technology',
-    'Marketing',
-    'Finance',
-    'Healthcare',
-    'Education',
-    'Manufacturing',
-    'Design',
-    'Research'
+    'テクノロジー',
+    'マーケティング',
+    '金融',
+    '医療',
+    '教育',
+    '製造',
+    'デザイン',
+    '研究'
   ];
 
   const locations = [
-    'Tokyo',
-    'Osaka',
-    'Kyoto',
-    'Fukuoka',
-    'Sapporo',
-    'Nagoya',
-    'Yokohama'
+    '東京',
+    '大阪',
+    '京都',
+    '福岡',
+    '札幌',
+    '名古屋',
+    '横浜'
   ];
 
   const filteredInternships = internships.filter(internship => {
@@ -74,9 +74,9 @@ const InternshipSearch: React.FC = () => {
   return (
     <div className="py-8">
       <div className="mb-8">
-        <h1 className="text-2xl font-bold text-gray-900 mb-2">Find Your Perfect Internship</h1>
+        <h1 className="text-2xl font-bold text-gray-900 mb-2">インターンシップを探す</h1>
         <p className="text-gray-600">
-          Search through hundreds of internship opportunities that match your skills and interests.
+          あなたのスキルと興味に合った数百のインターンシップの中から、理想の機会を見つけましょう。
         </p>
       </div>
 
@@ -87,7 +87,7 @@ const InternshipSearch: React.FC = () => {
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
               <input
                 type="text"
-                placeholder="Search by title, company, or keywords"
+                placeholder="職種、企業名、キーワードで検索"
                 className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
@@ -99,7 +99,7 @@ const InternshipSearch: React.FC = () => {
             className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
           >
             <Filter className="h-5 w-5 mr-2" />
-            Filters
+            絞り込み
           </button>
         </div>
 
@@ -107,13 +107,13 @@ const InternshipSearch: React.FC = () => {
           <div className="mt-4 p-4 bg-white border border-gray-200 rounded-lg">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Location</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">勤務地</label>
                 <select
                   className="w-full border border-gray-300 rounded-md shadow-sm py-2 pl-3 pr-10 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   value={location}
                   onChange={(e) => setLocation(e.target.value)}
                 >
-                  <option value="">All Locations</option>
+                  <option value="">すべての地域</option>
                   {locations.map(loc => (
                     <option key={loc} value={loc}>{loc}</option>
                   ))}
@@ -121,13 +121,13 @@ const InternshipSearch: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Industry</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">業界</label>
                 <select
                   className="w-full border border-gray-300 rounded-md shadow-sm py-2 pl-3 pr-10 focus:outline-none focus:ring-blue-500 focus:border-blue-500"
                   value={industry}
                   onChange={(e) => setIndustry(e.target.value)}
                 >
-                  <option value="">All Industries</option>
+                  <option value="">すべての業界</option>
                   {industries.map(ind => (
                     <option key={ind} value={ind}>{ind}</option>
                   ))}
@@ -135,7 +135,7 @@ const InternshipSearch: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">Work Type</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">勤務形態</label>
                 <div className="flex items-center mt-2">
                   <input
                     type="checkbox"
@@ -145,7 +145,7 @@ const InternshipSearch: React.FC = () => {
                     className="h-4 w-4 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                   />
                   <label htmlFor="remote" className="ml-2 text-sm text-gray-700">
-                    Remote Available
+                    リモートワーク可
                   </label>
                 </div>
               </div>
@@ -172,7 +172,7 @@ const InternshipSearch: React.FC = () => {
                   to={`/internship/${internship.id}`}
                   className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-blue-600 hover:bg-blue-700"
                 >
-                  View Details
+                  詳細を見る
                 </Link>
               </div>
 
@@ -191,12 +191,12 @@ const InternshipSearch: React.FC = () => {
                 </div>
                 <div className="flex items-center">
                   <Clock className="h-4 w-4 mr-1 text-gray-400" />
-                  <span>Deadline: {new Date(internship.deadline).toLocaleDateString()}</span>
+                  <span>応募締切: {new Date(internship.deadline).toLocaleDateString()}</span>
                 </div>
                 {internship.isRemote && (
                   <div className="flex items-center">
                     <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                      Remote Available
+                      リモート可
                     </span>
                   </div>
                 )}

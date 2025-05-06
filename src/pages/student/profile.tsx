@@ -9,51 +9,51 @@ const StudentProfile = () => {
           <div className="p-3 bg-blue-100 rounded-full">
             <User className="w-8 h-8 text-blue-600" />
           </div>
-          <h1 className="text-2xl font-bold text-gray-800">Student Profile</h1>
+          <h1 className="text-2xl font-bold text-gray-800">プロフィール設定</h1>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Full Name</label>
+              <label className="block text-sm font-medium text-gray-700">氏名</label>
               <input
                 type="text"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                placeholder="John Doe"
+                placeholder="山田 太郎"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Email</label>
+              <label className="block text-sm font-medium text-gray-700">メールアドレス</label>
               <input
                 type="email"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                placeholder="john@example.com"
+                placeholder="yamada@example.com"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">University</label>
+              <label className="block text-sm font-medium text-gray-700">大学名</label>
               <input
                 type="text"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                placeholder="University Name"
+                placeholder="○○大学"
               />
             </div>
           </div>
 
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Major</label>
+              <label className="block text-sm font-medium text-gray-700">学部・学科</label>
               <input
                 type="text"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                placeholder="Computer Science"
+                placeholder="工学部 情報工学科"
               />
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Graduation Year</label>
+              <label className="block text-sm font-medium text-gray-700">卒業予定年度</label>
               <input
                 type="number"
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
@@ -62,11 +62,11 @@ const StudentProfile = () => {
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-gray-700">Skills</label>
+              <label className="block text-sm font-medium text-gray-700">スキル・資格</label>
               <textarea
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                 rows={3}
-                placeholder="List your key skills..."
+                placeholder="あなたの持っているスキルや資格を入力してください"
               />
             </div>
           </div>
@@ -77,7 +77,7 @@ const StudentProfile = () => {
             type="button"
             className="bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
-            Save Changes
+            変更を保存
           </button>
         </div>
       </div>

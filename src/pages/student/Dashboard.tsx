@@ -183,15 +183,15 @@ const StudentDashboard: React.FC = () => {
   const getStatusText = (status: string) => {
     switch (status) {
       case 'pending':
-        return 'Pending Review';
+        return '審査待ち';
       case 'reviewing':
-        return 'Under Review';
+        return '審査中';
       case 'interview':
-        return 'Interview Stage';
+        return '面接段階';
       case 'accepted':
-        return 'Accepted';
+        return '合格';
       case 'rejected':
-        return 'Not Selected';
+        return '不合格';
       default:
         return status;
     }
@@ -221,10 +221,10 @@ const StudentDashboard: React.FC = () => {
     <div className="py-8">
       <div className="mb-8">
         <h1 className="text-2xl font-bold text-gray-900 mb-2">
-          Welcome, {user?.name}!
+          ようこそ、{user?.name}さん！
         </h1>
         <p className="text-gray-600">
-          Here's an overview of your internship applications and opportunities.
+          インターンシップの応募状況と新着情報をご確認ください。
         </p>
       </div>
 
@@ -232,39 +232,39 @@ const StudentDashboard: React.FC = () => {
         <div className="bg-blue-50 rounded-lg p-6 border border-blue-100">
           <div className="flex items-center text-blue-600 mb-3">
             <Briefcase className="h-5 w-5 mr-2" />
-            <h3 className="font-semibold">Applications</h3>
+            <h3 className="font-semibold">応募状況</h3>
           </div>
           <p className="text-3xl font-bold">{applications.length}</p>
-          <p className="text-sm text-gray-600">Internships applied to</p>
+          <p className="text-sm text-gray-600">応募中のインターンシップ</p>
         </div>
         
         <div className="bg-purple-50 rounded-lg p-6 border border-purple-100">
           <div className="flex items-center text-purple-600 mb-3">
             <User className="h-5 w-5 mr-2" />
-            <h3 className="font-semibold">Interviews</h3>
+            <h3 className="font-semibold">面接</h3>
           </div>
           <p className="text-3xl font-bold">{applications.filter(app => app.status === 'interview').length}</p>
-          <p className="text-sm text-gray-600">Currently in interview stage</p>
+          <p className="text-sm text-gray-600">面接段階の応募</p>
         </div>
         
         <div className="bg-green-50 rounded-lg p-6 border border-green-100">
           <div className="flex items-center text-green-600 mb-3">
             <BookOpen className="h-5 w-5 mr-2" />
-            <h3 className="font-semibold">New Opportunities</h3>
+            <h3 className="font-semibold">新着スカウト</h3>
           </div>
           <p className="text-3xl font-bold">{scouts.length}</p>
-          <p className="text-sm text-gray-600">New scout messages received</p>
+          <p className="text-sm text-gray-600">企業からのスカウトメッセージ</p>
         </div>
       </div>
 
       <div className="mb-10">
         <div className="flex justify-between items-center mb-5">
-          <h2 className="text-xl font-bold text-gray-900">Recent Applications</h2>
+          <h2 className="text-xl font-bold text-gray-900">最近の応募</h2>
           <Link 
             to="/student/applications" 
             className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center"
           >
-            View all
+            すべて見る
             <ArrowUpRight className="h-4 w-4 ml-1" />
           </Link>
         </div>
@@ -272,13 +272,13 @@ const StudentDashboard: React.FC = () => {
         {applications.length === 0 ? (
           <div className="bg-white rounded-lg border p-6 text-center">
             <Briefcase className="h-12 w-12 text-gray-400 mx-auto mb-3" />
-            <h3 className="text-lg font-medium text-gray-900 mb-1">No applications yet</h3>
-            <p className="text-gray-600 mb-4">Start exploring internships and apply to opportunities that match your interests.</p>
+            <h3 className="text-lg font-medium text-gray-900 mb-1">応募履歴がありません</h3>
+            <p className="text-gray-600 mb-4">興味のあるインターンシップに応募して、キャリアの第一歩を踏み出しましょう。</p>
             <Link 
               to="/student/search" 
               className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
             >
-              Find Internships
+              インターンシップを探す
             </Link>
           </div>
         ) : (
@@ -324,21 +324,21 @@ const StudentDashboard: React.FC = () => {
 
       <div className="mb-10">
         <div className="flex justify-between items-center mb-5">
-          <h2 className="text-xl font-bold text-gray-900">Companies Interested in You</h2>
+          <h2 className="text-xl font-bold text-gray-900">スカウトメッセージ</h2>
         </div>
         
         {scouts.length === 0 ? (
           <div className="bg-white rounded-lg border p-6 text-center">
             <User className="h-12 w-12 text-gray-400 mx-auto mb-3" />
-            <h3 className="text-lg font-medium text-gray-900 mb-1">No scouts yet</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-1">スカウトはまだありません</h3>
             <p className="text-gray-600 mb-4">
-              Complete your profile to increase your chances of being discovered by companies.
+              プロフィールを充実させて、企業からのスカウトを待ちましょう。
             </p>
             <Link 
               to="/student/profile" 
               className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700"
             >
-              Update Profile
+              プロフィールを編集
             </Link>
           </div>
         ) : (
@@ -381,10 +381,10 @@ const StudentDashboard: React.FC = () => {
                         
                         <div className="mt-3 flex gap-2">
                           <button className="inline-flex items-center justify-center px-3 py-1.5 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-                            View Details
+                            詳細を見る
                           </button>
                           <button className="inline-flex items-center justify-center px-3 py-1.5 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50">
-                            Respond
+                            返信する
                           </button>
                         </div>
                       </div>
@@ -399,12 +399,12 @@ const StudentDashboard: React.FC = () => {
 
       <div>
         <div className="flex justify-between items-center mb-5">
-          <h2 className="text-xl font-bold text-gray-900">Recommended for You</h2>
+          <h2 className="text-xl font-bold text-gray-900">おすすめのインターンシップ</h2>
           <Link 
             to="/student/search" 
             className="text-blue-600 hover:text-blue-700 text-sm font-medium flex items-center"
           >
-            View all
+            すべて見る
             <ArrowUpRight className="h-4 w-4 ml-1" />
           </Link>
         </div>
@@ -469,13 +469,13 @@ const StudentDashboard: React.FC = () => {
                       to={`/internship/${internship.id}`}
                       className="w-full inline-flex justify-center py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50"
                     >
-                      View Details
+                      詳細を見る
                     </Link>
                     <Link
                       to={`/internship/${internship.id}`}
                       className="w-full inline-flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700"
                     >
-                      Apply Now
+                      応募する
                     </Link>
                   </div>
                 </div>
