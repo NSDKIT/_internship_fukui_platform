@@ -1,11 +1,13 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { User, AuthState, UserType } from '../types';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../lib/supabase';
+import { getProfile, updateProfile } from '../lib/api';
 
 interface AuthContextType extends AuthState {
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, name: string, userType: UserType) => Promise<void>;
-  logout: () => void;
+  logout: () => Promise<void>;
   updateUser: (userData: Partial<User>) => Promise<void>;
 }
 
@@ -28,153 +30,267 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   });
   const navigate = useNavigate();
 
-  // Check if user is already logged in
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-          const user = JSON.parse(storedUser);
+        const { data: { session }, error: sessionError } = await supabase.auth.getSession();
+        
+        if (sessionError) throw sessionError;
+        
+        if (session?.user) {
+          const profile = await getProfile(session.access_token);
+          
+          if (!profile) {
+            setState({
+              user: null,
+              isAuthenticated: false,
+              isLoading: false,
+              error: 'Profile not found',
+            });
+            return;
+          }
+
           setState({
-            user,
+            user: profile,
             isAuthenticated: true,
             isLoading: false,
             error: null,
           });
         } else {
           setState({
-            ...state,
+            user: null,
+            isAuthenticated: false,
             isLoading: false,
+            error: null,
           });
         }
       } catch (error) {
-        console.error('Authentication check failed:', error);
+        console.error('Auth check error:', error);
         setState({
           user: null,
           isAuthenticated: false,
           isLoading: false,
-          error: 'Failed to authenticate',
+          error: 'Authentication check failed',
         });
       }
     };
 
     checkAuth();
+
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (event === 'SIGNED_IN' && session?.user) {
+        try {
+          const profile = await getProfile(session.access_token);
+          
+          if (!profile) {
+            setState({
+              user: null,
+              isAuthenticated: false,
+              isLoading: false,
+              error: 'Profile not found',
+            });
+            return;
+          }
+
+          setState({
+            user: profile,
+            isAuthenticated: true,
+            isLoading: false,
+            error: null,
+          });
+        } catch (error) {
+          console.error('Profile fetch error:', error);
+          setState({
+            user: null,
+            isAuthenticated: false,
+            isLoading: false,
+            error: 'Failed to fetch user profile',
+          });
+        }
+      } else if (event === 'SIGNED_OUT') {
+        setState({
+          user: null,
+          isAuthenticated: false,
+          isLoading: false,
+          error: null,
+        });
+      }
+    });
+
+    return () => {
+      subscription.unsubscribe();
+    };
   }, []);
 
   const login = async (email: string, password: string) => {
     try {
-      setState({ ...state, isLoading: true, error: null });
+      setState(prev => ({ ...prev, isLoading: true, error: null }));
       
-      // This would be an API call in a real application
-      // Simulating API response for demo purposes
-      const mockUser: User = {
-        id: '123',
+      const { data: { session }, error: signInError } = await supabase.auth.signInWithPassword({
         email,
-        name: email.split('@')[0],
-        userType: email.includes('company') ? 'company' : 'student',
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      };
-      
-      // Store the user in localStorage for persistence
-      localStorage.setItem('user', JSON.stringify(mockUser));
-      
-      setState({
-        user: mockUser,
-        isAuthenticated: true,
-        isLoading: false,
-        error: null,
+        password,
       });
 
-      // Redirect based on user type
-      if (mockUser.userType === 'student') {
-        navigate('/student/dashboard');
-      } else if (mockUser.userType === 'company') {
-        navigate('/company/dashboard');
+      if (signInError) throw signInError;
+
+      if (session) {
+        const profile = await getProfile(session.access_token);
+        
+        if (!profile) {
+          setState({
+            user: null,
+            isAuthenticated: false,
+            isLoading: false,
+            error: 'Profile not found',
+          });
+          return;
+        }
+
+        setState({
+          user: profile,
+          isAuthenticated: true,
+          isLoading: false,
+          error: null,
+        });
+
+        if (profile.userType === 'student') {
+          navigate('/student/dashboard');
+        } else if (profile.userType === 'company') {
+          navigate('/company/dashboard');
+        }
       }
-    } catch (error) {
-      console.error('Login failed:', error);
-      setState({
-        ...state,
+    } catch (error: any) {
+      console.error('Login error:', error);
+      setState(prev => ({
+        ...prev,
         isLoading: false,
-        error: 'Invalid email or password',
-      });
+        error: error.message || 'Invalid email or password',
+      }));
     }
   };
 
   const register = async (email: string, password: string, name: string, userType: UserType) => {
     try {
-      setState({ ...state, isLoading: true, error: null });
+      setState(prev => ({ ...prev, isLoading: true, error: null }));
       
-      // This would be an API call in a real application
-      // Simulating API response for demo purposes
-      const mockUser: User = {
-        id: '123',
+      const { data: { session }, error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+      });
+
+      if (signUpError) {
+        if (signUpError.message === 'User already registered') {
+          throw new Error('このメールアドレスは既に登録されています。');
+        }
+        throw signUpError;
+      }
+      
+      if (!session) throw new Error('Registration failed: No session returned');
+
+      const profile = {
+        id: session.user.id,
         email,
         name,
-        userType,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
+        user_type: userType, // Use snake_case for Supabase
+        ...(userType === 'student' ? {
+          university: '',
+          major: '',
+          graduation_year: new Date().getFullYear() + 4,
+        } : {
+          company_name: name,
+          industry: '',
+        }),
       };
+
+      const updatedProfile = await updateProfile(session.access_token, profile);
       
-      // Store the user in localStorage for persistence
-      localStorage.setItem('user', JSON.stringify(mockUser));
-      
+      if (!updatedProfile) {
+        setState({
+          user: null,
+          isAuthenticated: false,
+          isLoading: false,
+          error: 'Failed to create user profile',
+        });
+        return;
+      }
+
       setState({
-        user: mockUser,
+        user: updatedProfile,
         isAuthenticated: true,
         isLoading: false,
         error: null,
       });
 
-      // Redirect based on user type
       if (userType === 'student') {
         navigate('/student/profile');
       } else if (userType === 'company') {
         navigate('/company/profile');
       }
-    } catch (error) {
-      console.error('Registration failed:', error);
-      setState({
-        ...state,
+    } catch (error: any) {
+      console.error('Registration error:', error);
+      setState(prev => ({
+        ...prev,
         isLoading: false,
-        error: 'Registration failed',
-      });
+        error: error.message || 'Registration failed',
+      }));
     }
   };
 
-  const logout = () => {
-    localStorage.removeItem('user');
-    setState({
-      user: null,
-      isAuthenticated: false,
-      isLoading: false,
-      error: null,
-    });
-    navigate('/');
+  const logout = async () => {
+    try {
+      setState(prev => ({ ...prev, isLoading: true }));
+      
+      const { error } = await supabase.auth.signOut();
+      if (error) throw error;
+
+      setState({
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+        error: null,
+      });
+      
+      navigate('/');
+    } catch (error: any) {
+      console.error('Logout error:', error);
+      setState(prev => ({
+        ...prev,
+        isLoading: false,
+        error: error.message || 'Failed to logout',
+      }));
+    }
   };
 
   const updateUser = async (userData: Partial<User>) => {
     try {
-      setState({ ...state, isLoading: true });
+      setState(prev => ({ ...prev, isLoading: true }));
       
-      // In a real app, this would be an API call
-      const updatedUser = { ...state.user, ...userData, updatedAt: new Date().toISOString() } as User;
+      const { data: { session } } = await supabase.auth.getSession();
+      if (!session) throw new Error('No active session');
+
+      const updatedProfile = await updateProfile(session.access_token, userData);
       
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-      
+      if (!updatedProfile) {
+        setState(prev => ({
+          ...prev,
+          isLoading: false,
+          error: 'Failed to update user profile',
+        }));
+        return;
+      }
+
       setState({
         ...state,
-        user: updatedUser,
+        user: updatedProfile,
         isLoading: false,
       });
-    } catch (error) {
-      console.error('Failed to update user:', error);
-      setState({
-        ...state,
+    } catch (error: any) {
+      console.error('Update user error:', error);
+      setState(prev => ({
+        ...prev,
         isLoading: false,
-        error: 'Failed to update user information',
-      });
+        error: error.message || 'Failed to update user information',
+      }));
     }
   };
 

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Search, MapPin, Building, GraduationCap, Filter, Star, Mail } from 'lucide-react';
 
 const StudentSearch: React.FC = () => {
@@ -6,6 +7,7 @@ const StudentSearch: React.FC = () => {
   const [selectedUniversity, setSelectedUniversity] = useState('');
   const [selectedMajor, setSelectedMajor] = useState('');
   const [selectedGradYear, setSelectedGradYear] = useState('');
+  const [showFilters, setShowFilters] = useState(false);
 
   // Mock data for demonstration
   const students = [
