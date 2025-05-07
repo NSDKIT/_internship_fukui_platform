@@ -5,31 +5,26 @@ export interface User {
   email: string;
   name: string;
   userType: UserType;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface StudentProfile extends User {
-  university: string;
-  major: string;
-  graduationYear: number;
-  skills: string[];
-  location: string;
-  bio: string;
+  createdAt?: string;
+  updatedAt?: string;
+  location?: string;
+  bio?: string;
   avatarUrl?: string;
-  resume?: string;
-  preferredIndustries: string[];
-  preferredLocations: string[];
-}
-
-export interface CompanyProfile extends User {
-  companyName: string;
-  industry: string;
-  size: string;
-  location: string;
-  description: string;
-  websiteUrl: string;
-  logoUrl?: string;
+  websiteUrl?: string;
+  
+  // Student-specific fields
+  university?: string;
+  major?: string;
+  graduationYear?: number;
+  skills?: string[];
+  resumeUrl?: string;
+  preferredIndustries?: string[];
+  preferredLocations?: string[];
+  
+  // Company-specific fields
+  companyName?: string;
+  industry?: string;
+  companySize?: string;
 }
 
 export interface Internship {
